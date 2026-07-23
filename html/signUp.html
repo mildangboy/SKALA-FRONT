@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKALA-FRONT | Login</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- 미니홈피 감성 BGM: Fall Out Boy - The Last of the Real Ones (유튜브 공식 임베드) -->
+  <div class="bgm-widget">
+    <div class="bgm-panel">
+      <p class="bgm-hint"><span class="bgm-hint-icon" aria-hidden="true">♪</span> 눌러서 BGM 재생</p>
+      <p id="bgmTitle" class="bgm-title">The Last of the Real Ones</p>
+      <p id="bgmArtist" class="bgm-artist">Fall Out Boy</p>
+      <input type="range" id="bgmSeek" class="bgm-seek" min="0" max="100" value="0" step="0.1" aria-label="재생 위치" />
+      <div class="bgm-time">
+        <span id="bgmCurrent">0:00</span>
+        <span id="bgmDuration">0:00</span>
+      </div>
+      <div class="bgm-controls">
+        <button id="bgmPrev" class="bgm-control-btn" type="button" aria-label="이전 곡">⏮</button>
+        <button id="bgmPlayPause" class="bgm-control-btn" type="button" aria-label="재생/일시정지">
+          <span class="bgm-playpause-icon" aria-hidden="true">▶</span>
+        </button>
+        <button id="bgmNext" class="bgm-control-btn" type="button" aria-label="다음 곡">⏭</button>
+      </div>
+    </div>
+    <button id="bgmToggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="bgm-icon" aria-hidden="true">♪</span>
+    </button>
+  </div>
+  <div id="bgmPlayer" class="bgm-player" aria-hidden="true"></div>
+
+<div id="app">
+<div class="container">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-top" href="index.html">
+        <div class="crest" aria-hidden="true">
+          <img src="../images/logo.svg" alt="" />
+        </div>
+        <h1>Good Day, Martin!</h1>
+      </a>
+      <p class="header-tagline">Login</p>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-bar">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNavList" aria-label="메뉴 열기">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul id="siteNavList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="myProfile.html">About me</a></li>
+        <li><a href="myHoliday.html">Holiday</a></li>
+        <li><a href="myClass.html">Timetable</a></li>
+        <li><a href="myTrip.html">World Trip</a></li>
+        <li><a href="myRanking.html">Live standings</a></li>
+        <li><a href="signUp.html" aria-current="page">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <main>
+      <h2>Login</h2>
+      <form action="signUpResult.html" method="get" novalidate>
+        <fieldset>
+          <legend>기본 정보</legend>
+
+          <div class="form-row">
+            <label for="userName">이름 <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="text" id="userName" name="userName" required minlength="2" placeholder="홍길동" />
+          </div>
+
+          <div class="form-row">
+            <label for="userEmail">이메일 <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="email" id="userEmail" name="userEmail" required placeholder="example@email.com" />
+          </div>
+
+          <div class="form-row">
+            <label for="birthDate">생년월일 <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="date" id="birthDate" name="birthDate" required />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>계정 정보</legend>
+
+          <div class="form-row">
+            <label for="userPw">비밀번호 <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="password" id="userPw" name="userPw" required minlength="8" placeholder="8자 이상 입력" />
+            <small>영문, 숫자를 포함하여 8자 이상 입력해주세요.</small>
+          </div>
+
+          <div class="form-row">
+            <label for="userPwConfirm">비밀번호 확인 <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="password" id="userPwConfirm" name="userPwConfirm" required minlength="8" placeholder="비밀번호를 다시 입력" />
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>관심 분야</legend>
+          <div class="form-row choice-group">
+            <label for="interestHtml"><input type="checkbox" id="interestHtml" name="interest" value="HTML/CSS" />HTML/CSS</label>
+            <label for="interestJs"><input type="checkbox" id="interestJs" name="interest" value="JavaScript" />JavaScript</label>
+            <label for="interestReact"><input type="checkbox" id="interestReact" name="interest" value="React" />React</label>
+            <label for="interestAi"><input type="checkbox" id="interestAi" name="interest" value="AI" />AI 서비스</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>자기소개</legend>
+          <div class="form-row">
+            <label for="userBio">한 줄 소개</label>
+            <textarea id="userBio" name="userBio" rows="3" maxlength="120" placeholder="자신을 간단히 소개해주세요."></textarea>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>약관 동의</legend>
+          <div class="form-row choice-group">
+            <label for="agreeTerms"><input type="checkbox" id="agreeTerms" name="agreeTerms" required />이용약관 및 개인정보 처리방침에 동의합니다. <span class="required-mark" aria-hidden="true">*</span></label>
+          </div>
+        </fieldset>
+
+        <div class="form-actions">
+          <button type="reset">초기화</button>
+          <button type="submit">가입하기</button>
+        </div>
+      </form>
+    </main>
+
+    <aside>
+      <h2>안내</h2>
+      <p>모든 <mark>필수(*)</mark> 항목을 빠짐없이 입력해야 가입이 완료됩니다.</p>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 SKALA-FRONT. SK(주) AX Full-Stack Engineering 과정.</p>
+  </footer>
+
+  <script src="../script/nav.js" defer></script>
+  <script src="../script/signUp.js" defer></script>
+</div>
+</div>
+
+<script src="../script/bgm.js" defer></script>
+<script src="../script/spaNav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKALA-FRONT | Live standings</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- 미니홈피 감성 BGM: Fall Out Boy - The Last of the Real Ones (유튜브 공식 임베드) -->
+  <div class="bgm-widget">
+    <div class="bgm-panel">
+      <p class="bgm-hint"><span class="bgm-hint-icon" aria-hidden="true">♪</span> 눌러서 BGM 재생</p>
+      <p id="bgmTitle" class="bgm-title">The Last of the Real Ones</p>
+      <p id="bgmArtist" class="bgm-artist">Fall Out Boy</p>
+      <input type="range" id="bgmSeek" class="bgm-seek" min="0" max="100" value="0" step="0.1" aria-label="재생 위치" />
+      <div class="bgm-time">
+        <span id="bgmCurrent">0:00</span>
+        <span id="bgmDuration">0:00</span>
+      </div>
+      <div class="bgm-controls">
+        <button id="bgmPrev" class="bgm-control-btn" type="button" aria-label="이전 곡">⏮</button>
+        <button id="bgmPlayPause" class="bgm-control-btn" type="button" aria-label="재생/일시정지">
+          <span class="bgm-playpause-icon" aria-hidden="true">▶</span>
+        </button>
+        <button id="bgmNext" class="bgm-control-btn" type="button" aria-label="다음 곡">⏭</button>
+      </div>
+    </div>
+    <button id="bgmToggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="bgm-icon" aria-hidden="true">♪</span>
+    </button>
+  </div>
+  <div id="bgmPlayer" class="bgm-player" aria-hidden="true"></div>
+
+<div id="app">
+<div class="container">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-top" href="index.html">
+        <div class="crest" aria-hidden="true">
+          <img src="../images/logo.svg" alt="" />
+        </div>
+        <h1>Good Day, Martin!</h1>
+      </a>
+      <p class="header-tagline">Live standings</p>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-bar">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNavList" aria-label="메뉴 열기">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul id="siteNavList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="myProfile.html">About me</a></li>
+        <li><a href="myHoliday.html">Holiday</a></li>
+        <li><a href="myClass.html">Timetable</a></li>
+        <li><a href="myTrip.html">World Trip</a></li>
+        <li><a href="myRanking.html" aria-current="page">Live standings</a></li>
+        <li><a href="signUp.html">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <main>
+      <section id="epl-ranking">
+        <div class="table-scroll">
+          <table>
+            <caption>Premier League 2026-27 시즌 순위</caption>
+            <thead>
+              <tr>
+                <th scope="col">순위</th>
+                <th scope="col">팀</th>
+                <th scope="col">경기</th>
+                <th scope="col">승</th>
+                <th scope="col">무</th>
+                <th scope="col">패</th>
+                <th scope="col">득실차</th>
+                <th scope="col">승점</th>
+              </tr>
+            </thead>
+            <tbody id="eplTableBody">
+              <tr>
+                <td colspan="8">로딩 중... ⏳</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section id="arsenal-fixtures">
+        <h2>📅 아스널 다가오는 경기 일정</h2>
+        <p>아스널의 다음 경기 일정입니다. 시간은 한국 표준시(KST) 기준입니다.</p>
+        <ul id="fixtureList" class="fixture-list">
+          <li class="fixture-item">로딩 중... ⏳</li>
+        </ul>
+      </section>
+    </main>
+
+    <aside>
+      <h2>데이터 출처</h2>
+      <p>Premier League 순위: ESPN 공개 API</p>
+      <p>경기 일정: ESPN 공개 API (스코어보드)</p>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 SKALA-FRONT. SK(주) AX Full-Stack Engineering 과정.</p>
+  </footer>
+
+  <script src="../script/nav.js" defer></script>
+  <script type="module" src="../script/myRanking.js"></script>
+</div>
+</div>
+
+<script src="../script/bgm.js" defer></script>
+<script src="../script/spaNav.js" defer></script>
+</body>
+</html>

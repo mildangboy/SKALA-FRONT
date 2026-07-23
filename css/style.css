@@ -1,0 +1,1224 @@
+/* ============================================
+   SKALA-FRONT 공통 스타일시트
+   Arsenal FC 테마 (arsenal.com 실제 화면 참고)
+   - 크롬(헤더/내비/테이블 헤더/푸터): 옥스블러드 톤 다크 마룬 (밝은 레드가 아님)
+   - 콘텐츠 영역: 화이트 베이스, 절제된 색 사용 — 골드는 다크 배경 위 텍스트/아이콘에,
+     밝은 레드(#EF0107)는 버튼/링크 같은 인터랙션 포인트에만 사용
+   - 서체: 헤드라인은 Anton, UI/카드 제목은 Montserrat(둘 다 구글 폰트)을 사용하고,
+     본문은 SPOTV 등에서 많이 쓰는 에스코어드림(S-CoreDream)을 사용합니다.
+     (교수님 확인 결과 구글 폰트가 아니어도 괜찮다고 하여 재적용. 눈누(noonnu.cc)에서
+     제공하는 공식 웹폰트 CDN 링크 사용. Noto Sans KR은 로딩 실패 시 대비용 폴백.)
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Montserrat:wght@400;600;700;800;900&family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap');
+
+/* 에스코어드림 (본문용) - 출처: https://noonnu.cc/font_page/223 */
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-3Light.woff') format('woff');
+  font-weight: 300;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-4Regular.woff') format('woff');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-5Medium.woff') format('woff');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-6Bold.woff') format('woff');
+  font-weight: 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Escoredream';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/S-CoreDream-8Heavy.woff') format('woff');
+  font-weight: 900;
+  font-display: swap;
+}
+
+/* ---------- 초기화 ---------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --color-red: #D40006;           /* 인터랙션 포인트 전용 (버튼, 링크, 포커스) — 흰 배경 대비 5.5:1 확보 */
+  --color-maroon: #7a1018;        /* 상단 유틸리티 바 톤 */
+  --color-maroon-dark: #500b10;   /* 메인 내비/헤더/테이블 헤더 톤 */
+  --color-gold: #b79a63;          /* 다크 배경 위 텍스트/아이콘 */
+  --color-gold-light: #f0e2c4;    /* mark 하이라이트 등 */
+  --color-ink: #14161c;
+  --color-bg: #f4f4f5;
+  --color-surface: #ffffff;
+  --color-text: #1c1e24;
+  --color-text-light: #63666f;
+  --color-border: #e4e4e7;
+  --radius: 8px;
+  --shadow: 0 2px 10px rgba(20, 22, 28, 0.06);
+  --shadow-hover: 0 16px 30px rgba(20, 22, 28, 0.14);
+  --font-display: 'Anton', 'Escoredream', sans-serif;
+  --font-heading: 'Montserrat', 'Escoredream', sans-serif;
+  --font-body: 'Escoredream', 'Noto Sans KR', 'Montserrat', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol {
+  padding-left: 1.4rem;
+}
+
+/* ---------- 컨테이너 (헤더/내비는 풀블리드로 두고, 얇은 래퍼만 유지) ---------- */
+.container,
+#app {
+  display: contents;
+}
+
+/* ---------- 헤더 : 기본은 미니멀한 슬림 바, index.html만 히어로(hero) ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.site-header {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  padding: 1rem 1.5rem;
+  animation: fadeIn 0.5s ease-out both;
+}
+
+.site-header .header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.crest {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background-color: var(--color-maroon-dark);
+}
+
+.crest img {
+  width: 24px;
+  height: auto;
+}
+
+/* header-top: 크레스트 + 타이틀을 한 줄로 묶는 행이자, 클릭 시 홈으로 이동하는
+   로고 링크(네이버/구글 스타일). header-tagline은 그 아래 header-inner의
+   왼쪽 끝(=크레스트 왼쪽 끝)에 맞춰 정렬된다. */
+.header-top {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  transition: opacity 0.2s ease;
+}
+
+.header-top:hover,
+.header-top:focus-visible {
+  opacity: 0.82;
+}
+
+.header-top h1 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-ink);
+  margin: 0;
+}
+
+.header-tagline {
+  margin: 0;
+  color: var(--color-text-light);
+  font-family: var(--font-heading);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- 히어로 헤더 (index.html 전용) ---------- */
+.site-header.hero {
+  background:
+    linear-gradient(180deg, rgba(122, 16, 24, 0.55) 0%, rgba(80, 11, 16, 0.65) 100%),
+    url('../images/champion.jpeg') center 30% / cover no-repeat;
+  border-bottom: none;
+  padding: 3rem 1.5rem;
+}
+
+.site-header.hero .crest {
+  width: 54px;
+  height: 54px;
+  border: 2px solid var(--color-gold);
+}
+
+.site-header.hero .crest img {
+  width: 34px;
+}
+
+.site-header.hero .header-inner {
+  gap: 0.6rem;
+}
+
+.site-header.hero .header-top h1 {
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+.site-header.hero .header-tagline {
+  color: var(--color-gold);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 미니홈피 감성 티커 (스크롤 문구) ---------- */
+.ticker {
+  overflow: hidden;
+  background-color: var(--color-maroon-dark);
+}
+
+.ticker-track {
+  display: inline-flex;
+  width: max-content;
+  gap: 3rem;
+  padding: 0.4rem 0;
+  animation: tickerScroll 26s linear infinite;
+}
+
+.ticker-track span {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-gold);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@keyframes tickerScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+/* ---------- 내비게이션 ---------- */
+.site-nav {
+  background-color: var(--color-maroon-dark);
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.site-nav .nav-bar {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+}
+
+.site-nav ul {
+  list-style: none;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+/* 햄버거 버튼 (기본은 데스크톱에서 숨김) */
+.nav-toggle,
+.nav-toggle:hover,
+.nav-toggle:active {
+  display: none;
+  background-color: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+.nav-toggle {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+.nav-toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background-color: var(--color-gold);
+  border-radius: 2px;
+  transition: background-color 0.2s ease;
+}
+
+.nav-toggle:hover .nav-toggle-bar,
+.nav-toggle:focus-visible .nav-toggle-bar {
+  background-color: #fff;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.85rem 1.05rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.82rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  color: #fff;
+  border-bottom-color: var(--color-red);
+}
+
+.site-nav a[aria-current="page"] {
+  color: #fff;
+  border-bottom-color: var(--color-red);
+}
+
+/* ---------- 전체 레이아웃 (Flexbox: 메뉴/본문 분할) ---------- */
+.layout {
+  max-width: 1200px;
+  width: 100%;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+  display: flex;
+  gap: 2rem;
+  flex: 1;
+  align-items: flex-start;
+}
+
+.layout main {
+  flex: 3;
+  min-width: 0;
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  padding: 2rem;
+}
+
+.layout aside {
+  flex: 1;
+  min-width: 240px;
+  background-color: var(--color-surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+  position: sticky;
+  top: 5.5rem;
+}
+
+.layout aside h2 {
+  font-size: 1.15rem;
+  margin-bottom: 0.9rem;
+}
+
+section {
+  margin-bottom: 2.2rem;
+}
+
+section:last-child {
+  margin-bottom: 0;
+}
+
+article {
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--color-border);
+  transition: transform 0.2s ease;
+}
+
+article:last-child {
+  border-bottom: none;
+}
+
+article:hover {
+  transform: translateX(4px);
+}
+
+h1 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  font-size: 1.9rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  margin-bottom: 1.2rem;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  color: var(--color-ink);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 1.1rem;
+  font-size: 1.25rem;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  color: var(--color-ink);
+}
+
+p {
+  margin-bottom: 0.6rem;
+}
+
+mark {
+  background-color: var(--color-gold-light);
+  color: var(--color-ink);
+  font-weight: 700;
+  padding: 0.05em 0.35em;
+  border-radius: 4px;
+}
+
+/* ---------- 버튼 ---------- */
+button,
+.btn {
+  cursor: pointer;
+  border: none;
+  border-radius: 4px;
+  background-color: var(--color-red);
+  color: #fff;
+  padding: 0.7rem 1.3rem;
+  font-family: var(--font-heading);
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--color-maroon-dark);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+button[type="reset"] {
+  background-color: transparent;
+  color: var(--color-text-light);
+  box-shadow: inset 0 0 0 1.5px var(--color-border);
+}
+
+button[type="reset"]:hover {
+  color: var(--color-maroon-dark);
+  box-shadow: inset 0 0 0 1.5px var(--color-maroon-dark);
+  background-color: transparent;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-maroon-dark);
+  box-shadow: inset 0 0 0 1.5px var(--color-maroon-dark);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-maroon-dark);
+  color: #fff;
+  box-shadow: inset 0 0 0 1.5px var(--color-maroon-dark);
+}
+
+/* ---------- 날씨 위젯 ---------- */
+.weather-caption {
+  color: var(--color-text-light);
+  font-size: 0.85rem;
+  margin-bottom: 0.9rem;
+}
+
+.weather-box {
+  background-color: #f6f5f2;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1rem;
+  min-height: 90px;
+  text-align: center;
+}
+
+/* ---------- 최신 아스널 소식 (index.html) ---------- */
+.section-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.1rem;
+}
+
+.section-heading h2 {
+  margin-bottom: 0;
+}
+
+.section-link {
+  flex-shrink: 0;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-red);
+  white-space: nowrap;
+}
+
+.section-link:hover {
+  text-decoration: underline;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.news-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-maroon-dark);
+  border-radius: var(--radius);
+  padding: 1.1rem 1.3rem;
+  transition: box-shadow 0.25s ease, transform 0.25s ease, border-left-color 0.25s ease;
+}
+
+.news-card:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-4px);
+  border-left-color: var(--color-red);
+}
+
+.news-source {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--color-gold);
+  background-color: var(--color-maroon-dark);
+  display: inline-block;
+  padding: 0.15em 0.5em;
+  border-radius: 3px;
+  margin-bottom: 0.6rem;
+}
+
+.news-card h3 {
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.news-card h3 a {
+  color: var(--color-ink);
+  transition: color 0.2s ease;
+}
+
+.news-card h3 a:hover {
+  color: var(--color-red);
+  text-decoration: underline;
+}
+
+/* ---------- 테이블 (myClass.html) ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+caption {
+  text-align: left;
+  font-family: var(--font-display);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+  font-size: 1.3rem;
+  color: var(--color-maroon-dark);
+}
+
+th, td {
+  border: 1px solid var(--color-border);
+  padding: 0.75rem 0.6rem;
+  text-align: center;
+  font-size: 0.92rem;
+}
+
+thead th {
+  background-color: var(--color-maroon-dark);
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 0.82rem;
+}
+
+tbody th {
+  background-color: #f6f5f2;
+  color: var(--color-maroon-dark);
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafb;
+}
+
+tbody tr:hover {
+  background-color: rgba(239, 1, 7, 0.04);
+}
+
+/* ---------- 실시간 순위 (myRanking.html) ---------- */
+.table-scroll {
+  overflow-x: auto;
+  margin-bottom: 0.6rem;
+}
+
+.table-scroll table {
+  min-width: 480px;
+}
+
+tbody tr.highlight-row {
+  background-color: var(--color-gold-light);
+  font-weight: 700;
+}
+
+tbody tr.highlight-row:hover {
+  background-color: var(--color-gold-light);
+}
+
+.team-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: left;
+}
+
+.team-logo {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.fixture-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.fixture-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.4rem 1rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 3px solid var(--color-maroon-dark);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.1rem;
+  transition: box-shadow 0.25s ease, border-left-color 0.25s ease;
+}
+
+.fixture-item:hover {
+  box-shadow: var(--shadow-hover);
+  border-left-color: var(--color-red);
+}
+
+.fixture-date {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+  flex-basis: 100%;
+}
+
+.fixture-teams {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 700;
+  color: var(--color-ink);
+}
+
+.fixture-team-highlight {
+  color: var(--color-red);
+}
+
+.fixture-vs {
+  font-weight: 400;
+  color: var(--color-text-light);
+  font-size: 0.82rem;
+}
+
+.fixture-venue {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+}
+
+.source-note {
+  font-size: 0.82rem;
+  color: var(--color-text-light);
+}
+
+/* ---------- 폼 (signUp.html) ---------- */
+form fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 1.4rem;
+}
+
+form legend {
+  padding: 0 0.5rem;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-size: 0.85rem;
+  color: var(--color-red);
+}
+
+.form-row {
+  margin-bottom: 1rem;
+}
+
+.form-row:last-child {
+  margin-bottom: 0;
+}
+
+.form-row label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-weight: 500;
+  font-size: 0.92rem;
+}
+
+.required-mark {
+  color: var(--color-red);
+  font-weight: 700;
+}
+
+.form-row input[type="text"],
+.form-row input[type="email"],
+.form-row input[type="password"],
+.form-row input[type="date"],
+.form-row textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1.5px solid var(--color-border);
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 1.05rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-row input:focus,
+.form-row textarea:focus {
+  outline: none;
+  border-color: var(--color-red);
+  box-shadow: 0 0 0 3px rgba(239, 1, 7, 0.13);
+}
+
+.form-row small {
+  display: block;
+  margin-top: 0.3rem;
+  color: var(--color-text-light);
+  font-size: 0.8rem;
+}
+
+.choice-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.choice-group label {
+  font-weight: 400;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.7rem;
+}
+
+/* ---------- 정의 목록 (myProfile.html) ---------- */
+dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1rem;
+}
+
+dt {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-maroon-dark);
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+}
+
+dd {
+  color: var(--color-text);
+}
+
+/* ---------- 가입 결과 목록 (signUpResult.html) ---------- */
+#resultList {
+  margin-bottom: 1.6rem;
+}
+
+/* ---------- 연도별 주요 경력 타임라인 (myProfile.html) ---------- */
+.timeline {
+  list-style: none;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.timeline li {
+  border-left: 3px solid var(--color-maroon-dark);
+  padding-left: 0.8rem;
+}
+
+.timeline-year {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: var(--color-maroon-dark);
+  letter-spacing: 0.02em;
+}
+
+.timeline-event {
+  display: block;
+  margin-top: 0.15rem;
+  font-size: 0.92rem;
+  color: var(--color-text);
+  line-height: 1.5;
+}
+
+/* ---------- 여행지 카드 그리드 (myTrip.html, Grid 3열) ---------- */
+.trip-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.trip-card {
+  display: block;
+  margin: 0;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.trip-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-hover);
+}
+
+.trip-card img {
+  display: block;
+  width: 100%;
+  height: 190px;
+  object-fit: cover;
+}
+
+.trip-card .trip-body {
+  padding: 1.1rem;
+}
+
+.trip-card .trip-title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-ink);
+  font-size: 1.15rem;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+  margin-bottom: 0.4rem;
+}
+
+.trip-card .trip-desc {
+  color: var(--color-text);
+  margin-bottom: 0;
+}
+
+/* ---------- 푸터 ---------- */
+.site-footer {
+  background-color: var(--color-maroon-dark);
+  color: var(--color-gold);
+  text-align: center;
+  padding: 1.4rem 1rem;
+  margin-top: 2rem;
+  border-top: 3px solid var(--color-red);
+  font-size: 0.82rem;
+  font-family: var(--font-heading);
+  letter-spacing: 0.02em;
+}
+
+/* ---------- BGM 위젯 (index.html, 미니홈피 감성) ---------- */
+.bgm-player {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 2px;
+  height: 2px;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.bgm-widget {
+  position: fixed;
+  right: 1.2rem;
+  bottom: 1.2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  z-index: 50;
+}
+
+/* 호버(또는 키보드 포커스) 시 왼쪽으로 슬라이드되며 펼쳐지는 mp3 플레이어 패널 */
+.bgm-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+  opacity: 0;
+  background-color: var(--color-maroon-dark);
+  border: 2px solid var(--color-gold);
+  border-radius: 12px;
+  box-shadow: var(--shadow-hover);
+  white-space: nowrap;
+  transition: width 0.3s ease, padding 0.3s ease, opacity 0.25s ease;
+}
+
+.bgm-widget:hover .bgm-panel {
+  width: 230px;
+  padding: 0.8rem 1rem;
+  opacity: 1;
+}
+
+.bgm-title {
+  margin: 0;
+  color: #fff;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.bgm-artist {
+  margin: 0;
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.bgm-hint {
+  margin: 0 0 0.3rem;
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.bgm-hint-icon {
+  color: #fff;
+}
+
+.bgm-widget.is-playing .bgm-hint {
+  display: none;
+}
+
+.bgm-seek {
+  width: 100%;
+  height: 4px;
+  margin: 0.2rem 0;
+  -webkit-appearance: none;
+  appearance: none;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+.bgm-seek::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+  border: none;
+  cursor: pointer;
+}
+
+.bgm-seek::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: var(--color-gold);
+  border: none;
+  cursor: pointer;
+}
+
+.bgm-seek::-moz-range-track {
+  height: 4px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 2px;
+}
+
+.bgm-time {
+  display: flex;
+  justify-content: space-between;
+  color: var(--color-gold);
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  letter-spacing: 0.02em;
+}
+
+.bgm-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.4rem;
+  margin-top: 0.1rem;
+}
+
+.bgm-control-btn {
+  background: none;
+  border: none;
+  padding: 0.2rem 0.4rem;
+  color: var(--color-gold);
+  font-size: 1.05rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.15s ease;
+}
+
+.bgm-control-btn:hover {
+  color: #fff;
+  transform: scale(1.15);
+}
+
+.bgm-control-btn:active {
+  transform: scale(0.92);
+}
+
+.bgm-toggle {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: var(--color-maroon-dark);
+  color: var(--color-gold);
+  border: 2px solid var(--color-gold);
+  font-size: 1.3rem;
+  text-transform: none;
+  letter-spacing: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-hover);
+  transition: transform 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.bgm-toggle:hover {
+  transform: scale(1.08);
+}
+
+.bgm-icon {
+  color: #fff;
+}
+
+.bgm-toggle.is-playing {
+  background-color: var(--color-red);
+  color: #fff;
+  border-color: var(--color-red);
+}
+
+.bgm-toggle.is-playing .bgm-icon {
+  display: inline-block;
+  animation: bgmPulse 1.2s ease-in-out infinite;
+}
+
+.bgm-control-btn.is-playing .bgm-playpause-icon {
+  display: inline-block;
+  animation: bgmPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes bgmPulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgm-toggle.is-playing .bgm-icon,
+  .bgm-control-btn.is-playing .bgm-playpause-icon {
+    animation: none;
+  }
+}
+
+/* ---------- 반응형 (모바일 1열 전환) ---------- */
+@media (max-width: 768px) {
+  .layout {
+    flex-direction: column;
+  }
+
+  .layout aside {
+    position: static;
+    width: 100%;
+  }
+
+  .site-nav .nav-bar {
+    flex-wrap: wrap;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .site-nav ul {
+    display: none;
+    flex: 1 1 100%;
+    flex-direction: column;
+    gap: 0;
+    padding-bottom: 0.5rem;
+  }
+
+  .site-nav ul.nav-open {
+    display: flex;
+  }
+
+  .trip-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+  }
+
+  dl {
+    grid-template-columns: 1fr;
+  }
+
+  .header-top h1 {
+    font-size: 1.4rem;
+  }
+
+  table, thead, tbody, th, td, tr {
+    font-size: 0.82rem;
+  }
+}

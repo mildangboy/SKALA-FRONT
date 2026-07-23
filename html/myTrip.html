@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKALA-FRONT | World Trip</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- 미니홈피 감성 BGM: Fall Out Boy - The Last of the Real Ones (유튜브 공식 임베드) -->
+  <div class="bgm-widget">
+    <div class="bgm-panel">
+      <p class="bgm-hint"><span class="bgm-hint-icon" aria-hidden="true">♪</span> 눌러서 BGM 재생</p>
+      <p id="bgmTitle" class="bgm-title">The Last of the Real Ones</p>
+      <p id="bgmArtist" class="bgm-artist">Fall Out Boy</p>
+      <input type="range" id="bgmSeek" class="bgm-seek" min="0" max="100" value="0" step="0.1" aria-label="재생 위치" />
+      <div class="bgm-time">
+        <span id="bgmCurrent">0:00</span>
+        <span id="bgmDuration">0:00</span>
+      </div>
+      <div class="bgm-controls">
+        <button id="bgmPrev" class="bgm-control-btn" type="button" aria-label="이전 곡">⏮</button>
+        <button id="bgmPlayPause" class="bgm-control-btn" type="button" aria-label="재생/일시정지">
+          <span class="bgm-playpause-icon" aria-hidden="true">▶</span>
+        </button>
+        <button id="bgmNext" class="bgm-control-btn" type="button" aria-label="다음 곡">⏭</button>
+      </div>
+    </div>
+    <button id="bgmToggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="bgm-icon" aria-hidden="true">♪</span>
+    </button>
+  </div>
+  <div id="bgmPlayer" class="bgm-player" aria-hidden="true"></div>
+
+<div id="app">
+<div class="container">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-top" href="index.html">
+        <div class="crest" aria-hidden="true">
+          <img src="../images/logo.svg" alt="" />
+        </div>
+        <h1>Good Day, Martin!</h1>
+      </a>
+      <p class="header-tagline">World Trip</p>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-bar">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNavList" aria-label="메뉴 열기">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul id="siteNavList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="myProfile.html">About me</a></li>
+        <li><a href="myHoliday.html">Holiday</a></li>
+        <li><a href="myClass.html">Timetable</a></li>
+        <li><a href="myTrip.html" aria-current="page">World Trip</a></li>
+        <li><a href="myRanking.html">Live standings</a></li>
+        <li><a href="signUp.html">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <main>
+      <section>
+        <h2>추천 여행지</h2>
+        <p>저는 해외여행을 정말 좋아해서, 지금까지 25개국을 순전히 제 돈으로 다녀왔어요. 낯선 도시의 분위기를 느끼고 세계 각지의 사람들을 만나는 게 여행의 가장 큰 매력이라고 생각해요. 배낭여행으로 다니다 보니 야간기차에서 잠을 청한 적도 있고, 영국에서는 3층 침대에 누워 하루를 마무리한 적도 있을 만큼 다양한 경험을 했어요. 그중에서도 특히 추천하고 싶은 곳은 그리스 테살로니키, 터키 이스탄불, 네덜란드 로테르담, 그리고 호주 시드니와 캔버라예요.</p>
+        <div class="trip-grid">
+          <article class="trip-card">
+            <img src="../images/trip-thessaloniki.jpg" alt="테살로니키 해안 산책로와 화이트 타워의 노을 풍경" />
+            <div class="trip-body">
+              <h3 class="trip-title">그리스 테살로니키</h3>
+              <p class="trip-desc">에게해를 따라 이어지는 해안 산책로와 오스만 제국의 흔적이 공존하는 도시예요. 화이트 타워에서 바라보는 노을이 유독 아름다웠던 곳이에요.</p>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img src="../images/trip-istanbul.jpg" alt="이스탄불 보스포루스 해협과 블루모스크의 전경" />
+            <div class="trip-body">
+              <h3 class="trip-title">터키 이스탄불</h3>
+              <p class="trip-desc">유럽과 아시아 대륙이 만나는 도시답게, 골목마다 동서양의 문화가 뒤섞여 있어요. 아야소피아와 블루모스크를 오가며 하루 종일 걸어도 지루하지 않았어요.</p>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img src="../images/trip-rotterdam.jpg" alt="로테르담의 큐브하우스와 현대적인 스카이라인" />
+            <div class="trip-body">
+              <h3 class="trip-title">네덜란드 로테르담</h3>
+              <p class="trip-desc">제2차 세계대전 이후 새로 지어진 도시라 그런지, 큐브하우스처럼 파격적인 현대 건축물이 가득해요. 암스테르담과는 또 다른 매력의 네덜란드를 만날 수 있어요.</p>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img src="../images/trip-sydney.jpg" alt="시드니 오페라하우스와 하버브릿지가 보이는 항구 풍경" />
+            <div class="trip-body">
+              <h3 class="trip-title">호주 시드니</h3>
+              <p class="trip-desc">오페라하우스와 하버브릿지가 어우러진 항구 풍경은 사진으로 보던 것보다 훨씬 압도적이었어요. 서큘러 키에서 페리를 타고 바라본 스카이라인이 아직도 생생해요.</p>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img src="../images/trip-canberra.jpg" alt="캔버라 국회의사당과 벌리 그리핀 호수 전경" />
+            <div class="trip-body">
+              <h3 class="trip-title">호주 캔버라</h3>
+              <p class="trip-desc">화려하진 않지만, 계획도시답게 여유롭고 조용한 매력이 있는 도시예요. 벌리 그리핀 호수를 따라 자전거를 타며 여유를 만끽했던 기억이 나요.</p>
+            </div>
+          </article>
+
+          <article class="trip-card">
+            <img src="../images/trip-sofia.jpg" alt="소피아의 알렉산더 네프스키 대성당과 사회주의 시절 건축물이 공존하는 풍경" />
+            <div class="trip-body">
+              <h3 class="trip-title">불가리아 소피아</h3>
+              <p class="trip-desc">다른 유럽 도시에서는 흔히 느낄 수 없는 사회주의 시절의 흔적이 거리 곳곳에 남아 있어요. 동시에 불가리아 특유의 오래된 유적지도 함께 볼 수 있어서 인상 깊었던 곳이에요.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <aside>
+      <h2>여행 팁</h2>
+      <p>성수기에는 미리 숙소를 예약하고, 지역별 축제 일정을 확인해보세요.</p>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 SKALA-FRONT. Martin.</p>
+  </footer>
+
+  <script src="../script/nav.js" defer></script>
+</div>
+</div>
+
+<script src="../script/bgm.js" defer></script>
+<script src="../script/spaNav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKALA-FRONT | About me</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- 미니홈피 감성 BGM: Fall Out Boy - The Last of the Real Ones (유튜브 공식 임베드) -->
+  <div class="bgm-widget">
+    <div class="bgm-panel">
+      <p class="bgm-hint"><span class="bgm-hint-icon" aria-hidden="true">♪</span> 눌러서 BGM 재생</p>
+      <p id="bgmTitle" class="bgm-title">The Last of the Real Ones</p>
+      <p id="bgmArtist" class="bgm-artist">Fall Out Boy</p>
+      <input type="range" id="bgmSeek" class="bgm-seek" min="0" max="100" value="0" step="0.1" aria-label="재생 위치" />
+      <div class="bgm-time">
+        <span id="bgmCurrent">0:00</span>
+        <span id="bgmDuration">0:00</span>
+      </div>
+      <div class="bgm-controls">
+        <button id="bgmPrev" class="bgm-control-btn" type="button" aria-label="이전 곡">⏮</button>
+        <button id="bgmPlayPause" class="bgm-control-btn" type="button" aria-label="재생/일시정지">
+          <span class="bgm-playpause-icon" aria-hidden="true">▶</span>
+        </button>
+        <button id="bgmNext" class="bgm-control-btn" type="button" aria-label="다음 곡">⏭</button>
+      </div>
+    </div>
+    <button id="bgmToggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="bgm-icon" aria-hidden="true">♪</span>
+    </button>
+  </div>
+  <div id="bgmPlayer" class="bgm-player" aria-hidden="true"></div>
+
+<div id="app">
+<div class="container">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-top" href="index.html">
+        <div class="crest" aria-hidden="true">
+          <img src="../images/logo.svg" alt="" />
+        </div>
+        <h1>Good Day, Martin!</h1>
+      </a>
+      <p class="header-tagline">About me</p>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-bar">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNavList" aria-label="메뉴 열기">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul id="siteNavList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="myProfile.html" aria-current="page">About me</a></li>
+        <li><a href="myHoliday.html">Holiday</a></li>
+        <li><a href="myClass.html">Timetable</a></li>
+        <li><a href="myTrip.html">World Trip</a></li>
+        <li><a href="myRanking.html">Live standings</a></li>
+        <li><a href="signUp.html">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <main>
+      <article>
+        <h2>기본 정보</h2>
+        <dl>
+          <dt>이름</dt>
+          <dd>Martin</dd>
+          <dt>소속</dt>
+          <dd>SK(주) AX Full-Stack Engineering 과정</dd>
+          <dt>이메일</dt>
+          <dd>snapdragon1020@gmail.com</dd>
+          <dt>관심 분야</dt>
+          <dd>프론트엔드 개발, UI/UX, 인공지능 서비스</dd>
+          <dt>응원하는 팀</dt>
+          <dd>Premier League 아스널, KBO SSG 랜더스, F1 메르세데스 AMG (조지 러셀)</dd>
+        </dl>
+      </article>
+
+      <article>
+        <h2>보유 기술</h2>
+        <ul>
+          <li>HTML5 &amp; 시맨틱 마크업</li>
+          <li>CSS3 (Flexbox, Grid, 반응형 디자인)</li>
+          <li>JavaScript (ES6+, 비동기 처리)</li>
+          <li>Git &amp; GitHub 협업</li>
+        </ul>
+      </article>
+
+      <article>
+        <h2>학습 여정</h2>
+        <ol>
+          <li>HTML/CSS 기초 다지기</li>
+          <li>JavaScript 문법 및 DOM 조작 학습</li>
+          <li>ES6 모듈과 비동기 API 연동 실습</li>
+          <li>SKALA-FRONT 프로젝트로 종합 실습 완성</li>
+        </ol>
+      </article>
+    </main>
+
+    <aside>
+      <h2>📅 연도별 주요 경력</h2>
+      <ol class="timeline">
+        <li>
+          <span class="timeline-year">2020</span>
+          <span class="timeline-event">순천향대학교 정보보호학과 입학</span>
+        </li>
+        <li>
+          <span class="timeline-year">2022</span>
+          <span class="timeline-event">육군 조교 입대</span>
+        </li>
+        <li>
+          <span class="timeline-year">2023</span>
+          <span class="timeline-event">육군 병장 만기전역</span>
+        </li>
+        <li>
+          <span class="timeline-year">2024–2025</span>
+          <span class="timeline-event">호주 인턴 프로그램 파견</span>
+        </li>
+        <li>
+          <span class="timeline-year">2026</span>
+          <span class="timeline-event">SKALA 프로그램 입과</span>
+        </li>
+      </ol>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 SKALA-FRONT. SK(주) AX Full-Stack Engineering 과정.</p>
+  </footer>
+
+  <script src="../script/nav.js" defer></script>
+</div>
+</div>
+
+<script src="../script/bgm.js" defer></script>
+<script src="../script/spaNav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SKALA-FRONT | 가입 완료</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- 미니홈피 감성 BGM: Fall Out Boy - The Last of the Real Ones (유튜브 공식 임베드) -->
+  <div class="bgm-widget">
+    <div class="bgm-panel">
+      <p class="bgm-hint"><span class="bgm-hint-icon" aria-hidden="true">♪</span> 눌러서 BGM 재생</p>
+      <p id="bgmTitle" class="bgm-title">The Last of the Real Ones</p>
+      <p id="bgmArtist" class="bgm-artist">Fall Out Boy</p>
+      <input type="range" id="bgmSeek" class="bgm-seek" min="0" max="100" value="0" step="0.1" aria-label="재생 위치" />
+      <div class="bgm-time">
+        <span id="bgmCurrent">0:00</span>
+        <span id="bgmDuration">0:00</span>
+      </div>
+      <div class="bgm-controls">
+        <button id="bgmPrev" class="bgm-control-btn" type="button" aria-label="이전 곡">⏮</button>
+        <button id="bgmPlayPause" class="bgm-control-btn" type="button" aria-label="재생/일시정지">
+          <span class="bgm-playpause-icon" aria-hidden="true">▶</span>
+        </button>
+        <button id="bgmNext" class="bgm-control-btn" type="button" aria-label="다음 곡">⏭</button>
+      </div>
+    </div>
+    <button id="bgmToggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="bgm-icon" aria-hidden="true">♪</span>
+    </button>
+  </div>
+  <div id="bgmPlayer" class="bgm-player" aria-hidden="true"></div>
+
+<div id="app">
+<div class="container">
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="header-top" href="index.html">
+        <div class="crest" aria-hidden="true">
+          <img src="../images/logo.svg" alt="" />
+        </div>
+        <h1>Good Day, Martin!</h1>
+      </a>
+      <p class="header-tagline">회원가입 완료</p>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-bar">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNavList" aria-label="메뉴 열기">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul id="siteNavList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="myProfile.html">About me</a></li>
+        <li><a href="myHoliday.html">Holiday</a></li>
+        <li><a href="myClass.html">Timetable</a></li>
+        <li><a href="myTrip.html">World Trip</a></li>
+        <li><a href="myRanking.html">Live standings</a></li>
+        <li><a href="signUp.html" aria-current="page">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <main>
+      <h2>🎉 Sign-up Complete!</h2>
+      <p>입력하신 정보는 아래와 같습니다.</p>
+      <dl id="resultList">
+        <dt>정보</dt>
+        <dd>불러오는 중...</dd>
+      </dl>
+      <p><a class="btn" href="index.html">홈으로 돌아가기</a></p>
+    </main>
+
+    <aside>
+      <h2>안내</h2>
+      <p>본 페이지는 학습용 데모이며, 입력하신 정보는 서버에 저장되지 않고 화면에만 표시됩니다.</p>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 SKALA-FRONT. SK(주) AX Full-Stack Engineering 과정.</p>
+  </footer>
+
+  <script>
+    // 주의: DOMContentLoaded에 걸지 않고 즉시 실행합니다. SPA 방식 페이지 전환(spaNav.js)이
+    // 매 이동마다 이 스크립트를 다시 삽입해 재실행하는데, DOMContentLoaded는 문서 전체
+    // 수명 중 단 한 번만 발생하므로 그 이후에는 리스너가 걸리지 않기 때문입니다.
+    (function () {
+      const resultList = document.getElementById('resultList');
+      const params = new URLSearchParams(window.location.search);
+
+      // 비밀번호/비밀번호 확인은 보안상의 이유로 결과 화면에 표시하지 않습니다.
+      const fieldLabels = {
+        userName: '이름',
+        userEmail: '이메일',
+        birthDate: '생년월일',
+        interest: '관심 분야',
+        userBio: '한 줄 소개',
+        agreeTerms: '약관 동의',
+      };
+
+      if ([...params.keys()].length === 0) {
+        resultList.innerHTML = '<dt>알림</dt><dd>전달된 가입 정보가 없습니다. 회원가입 페이지에서 폼을 제출해주세요.</dd>';
+        return;
+      }
+
+      let html = '';
+      for (const key of Object.keys(fieldLabels)) {
+        const label = fieldLabels[key];
+
+        if (key === 'interest') {
+          const values = params.getAll('interest');
+          html += `<dt>${label}</dt><dd>${values.length ? values.join(', ') : '선택 안 함'}</dd>`;
+          continue;
+        }
+
+        if (key === 'agreeTerms') {
+          html += `<dt>${label}</dt><dd>${params.get('agreeTerms') ? '동의함 ✅' : '동의 안 함'}</dd>`;
+          continue;
+        }
+
+        const value = params.get(key);
+        html += `<dt>${label}</dt><dd>${value ? value : '입력 안 함'}</dd>`;
+      }
+
+      resultList.innerHTML = html;
+    })();
+  </script>
+  <script src="../script/nav.js" defer></script>
+</div>
+</div>
+
+<script src="../script/bgm.js" defer></script>
+<script src="../script/spaNav.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Martin's Profile</title>
+  <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+  <!-- 미니홈피 감성 BGM: Fall Out Boy - The Last of the Real Ones (유튜브 공식 임베드) -->
+  <div class="bgm-widget">
+    <div class="bgm-panel">
+      <p class="bgm-hint"><span class="bgm-hint-icon" aria-hidden="true">♪</span> 눌러서 BGM 재생</p>
+      <p id="bgmTitle" class="bgm-title">The Last of the Real Ones</p>
+      <p id="bgmArtist" class="bgm-artist">Fall Out Boy</p>
+      <input type="range" id="bgmSeek" class="bgm-seek" min="0" max="100" value="0" step="0.1" aria-label="재생 위치" />
+      <div class="bgm-time">
+        <span id="bgmCurrent">0:00</span>
+        <span id="bgmDuration">0:00</span>
+      </div>
+      <div class="bgm-controls">
+        <button id="bgmPrev" class="bgm-control-btn" type="button" aria-label="이전 곡">⏮</button>
+        <button id="bgmPlayPause" class="bgm-control-btn" type="button" aria-label="재생/일시정지">
+          <span class="bgm-playpause-icon" aria-hidden="true">▶</span>
+        </button>
+        <button id="bgmNext" class="bgm-control-btn" type="button" aria-label="다음 곡">⏭</button>
+      </div>
+    </div>
+    <button id="bgmToggle" class="bgm-toggle" type="button" aria-pressed="false" aria-label="배경음악 재생">
+      <span class="bgm-icon" aria-hidden="true">♪</span>
+    </button>
+  </div>
+  <div id="bgmPlayer" class="bgm-player" aria-hidden="true"></div>
+
+<div id="app">
+<div class="container">
+  <header class="site-header hero">
+    <div class="header-inner">
+      <a class="header-top" href="index.html">
+        <div class="crest" aria-hidden="true">
+          <img src="../images/logo.svg" alt="" />
+        </div>
+        <h1>Good Day, Martin!</h1>
+      </a>
+      <p class="header-tagline">축구를 사랑하는 주니어 Full-Stack 개발자, Martin</p>
+    </div>
+  </header>
+
+  <nav class="site-nav">
+    <div class="nav-bar">
+      <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNavList" aria-label="메뉴 열기">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+      <ul id="siteNavList">
+        <li><a href="index.html" aria-current="page">Home</a></li>
+        <li><a href="myProfile.html">About me</a></li>
+        <li><a href="myHoliday.html">Holiday</a></li>
+        <li><a href="myClass.html">Timetable</a></li>
+        <li><a href="myTrip.html">World Trip</a></li>
+        <li><a href="myRanking.html">Live standings</a></li>
+        <li><a href="signUp.html">Login</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+      <span>⚽ Arsenal — 2025/26 Premier League Champions</span>
+    </div>
+  </div>
+
+  <div class="layout">
+    <main>
+      <section id="intro">
+        <h2>안녕하세요, Martin입니다 👋</h2>
+        <p>SK(주) AX Full-Stack Engineering 과정에서 프론트엔드를 공부하고 있습니다. 코드를 짜지 않을 때는 <mark>아스널</mark>의 경기를 챙겨보고, SSG 랜더스와 F1의 조지 러셀을 응원해요.</p>
+        <p>이 사이트는 그런 제 일상과 관심사를 담은 개인 페이지 겸 프론트엔드 실습 프로젝트입니다. 위 메뉴를 통해 하나씩 둘러봐 주세요.</p>
+        <div class="cta-row">
+          <a class="btn" href="myProfile.html">나의 소개 보기</a>
+          <a class="btn btn-outline" href="myRanking.html">실시간 순위 보기</a>
+        </div>
+      </section>
+
+      <section id="arsenal-news">
+        <div class="section-heading">
+          <h2>⚽ 최신 아스널 소식</h2>
+          <a class="section-link" href="https://www.arsenal.com/news/men/1" target="_blank" rel="noopener noreferrer">전체 보기 ↗</a>
+        </div>
+        <div class="news-grid">
+          <article class="news-card">
+            <p class="news-source">ARSENAL.COM</p>
+            <h3><a href="https://www.arsenal.com/news/misa-im-sure-well-have-a-great-year-aEqiP0w1APUP" target="_blank" rel="noopener noreferrer">Misa: "I'm sure we'll have a great year"</a></h3>
+          </article>
+
+          <article class="news-card">
+            <p class="news-source">ARSENAL.COM</p>
+            <h3><a href="https://www.arsenal.com/news/misa-rodriguez-joins-arsenal-azLJ89B2R8MD" target="_blank" rel="noopener noreferrer">Misa Rodriguez joins Arsenal</a></h3>
+          </article>
+
+          <article class="news-card">
+            <p class="news-source">ARSENAL.COM</p>
+            <h3><a href="https://www.arsenal.com/news/4-things-you-need-to-know-about-misa-rodriguez-ahWla4E3l7gx" target="_blank" rel="noopener noreferrer">4 things you need to know about Misa Rodriguez</a></h3>
+          </article>
+
+          <article class="news-card">
+            <p class="news-source">ARSENAL.COM</p>
+            <h3><a href="https://www.arsenal.com/news/gallery-great-photos-as-rodriguez-signs-aBRum8g3ujgu" target="_blank" rel="noopener noreferrer">Gallery: Great photos as Rodriguez signs</a></h3>
+          </article>
+
+          <article class="news-card">
+            <p class="news-source">ARSENAL.COM</p>
+            <h3><a href="https://www.arsenal.com/news/outstanding-long-range-strikes-akW8g0O3xWmZ" target="_blank" rel="noopener noreferrer">Outstanding long-range strikes</a></h3>
+          </article>
+        </div>
+        <p class="source-note">※ 실시간 자동 갱신은 아니며, 2026년 7월 기준 arsenal.com에 게재된 실제 최신 뉴스 헤드라인입니다. 카드를 클릭하면 원문으로 이동합니다.</p>
+      </section>
+    </main>
+
+    <aside class="weather-widget">
+      <h2>🌤️ 에미레이츠 스타디움 날씨</h2>
+      <p class="weather-caption">아스널의 홈구장, 런던 에미레이츠 스타디움의 실시간 날씨입니다.</p>
+      <div id="weatherBox" class="weather-box">
+        <p>날씨 정보를 불러오는 중... ⏳</p>
+      </div>
+    </aside>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 SKALA-FRONT. SK(주) AX Full-Stack Engineering 과정.</p>
+  </footer>
+
+  <script src="../script/nav.js" defer></script>
+  <script type="module" src="../script/realtimeInfo.js"></script>
+
+  <!--
+    안내: file:// 로 직접 열면 브라우저 보안 정책(CORS) 때문에
+    realtimeInfo.js의 ES 모듈(import)이 차단되어 날씨가 표시되지 않습니다.
+    이 스크립트는 일반 스크립트라 file:// 에서도 실행되므로,
+    그 경우 사용자에게 원인과 해결 방법을 안내합니다.
+  -->
+  <script>
+    (function () {
+      if (window.location.protocol === 'file:') {
+        const weatherBox = document.getElementById('weatherBox');
+        if (weatherBox) {
+          weatherBox.innerHTML =
+            '<p>⚠️ 이 페이지를 파일로 직접 열면(file://) 브라우저 보안 정책 때문에 ' +
+            'ES 모듈 스크립트가 차단되어 날씨 기능이 동작하지 않습니다.</p>' +
+            '<p>로컬 서버로 실행해주세요. 예) 이 폴더에서 터미널을 열고 ' +
+            '<code>python3 -m http.server</code> 실행 후 ' +
+            '<code>http://localhost:8000/html/index.html</code> 접속</p>';
+        }
+      }
+    })();
+  </script>
+</div>
+</div>
+
+<script src="../script/bgm.js" defer></script>
+<script src="../script/spaNav.js" defer></script>
+</body>
+</html>
