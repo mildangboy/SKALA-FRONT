@@ -72,7 +72,12 @@
 
     let html;
     try {
-      const res = await fetch(url, { credentials: 'same-origin' });
+      // 주의: cache 옵션을 지정하지 않으면 브라우저가 예전에 방문했던 페이지를
+      // HTTP 캐시에서 그대로 재사용할 수 있습니다. 그러면 파일을 수정한 뒤에도
+      // SPA 이동으로 들어간 페이지에는 옛날 내용이 그대로 보이는 문제가 생깁니다
+      // (직접 새로고침한 페이지만 최신 내용으로 보이는 이유). 매번 서버에 새로
+      // 확인하도록 강제해서 항상 최신 파일을 반영하게 합니다.
+      const res = await fetch(url, { credentials: 'same-origin', cache: 'no-cache' });
       if (!res.ok) throw new Error('HTTP ' + res.status);
       html = await res.text();
     } catch (err) {
