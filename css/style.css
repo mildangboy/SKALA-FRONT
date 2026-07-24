@@ -896,6 +896,58 @@ form legend {
   gap: 0.7rem;
 }
 
+/* ---------- 로그인 / 회원가입 탭 (signUp.html) ---------- */
+.auth-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.4rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.auth-tab {
+  background: none;
+  color: var(--color-text-light);
+  padding: 0.7rem 0.2rem;
+  margin-bottom: -1px;
+  border: none;
+  border-bottom: 2.5px solid transparent;
+  border-radius: 0;
+  font-family: var(--font-heading);
+  font-size: 0.88rem;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0.01em;
+}
+
+.auth-tab:hover {
+  background: none;
+  color: var(--color-maroon-dark);
+  box-shadow: none;
+  transform: none;
+}
+
+.auth-tab.is-active {
+  color: var(--color-red);
+  border-bottom-color: var(--color-red);
+}
+
+.auth-panel[hidden] {
+  display: none;
+}
+
+.auth-notice {
+  padding: 1.4rem;
+  background-color: #fafafb;
+  border: 1px dashed var(--color-border);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.auth-notice p {
+  margin: 0 0 1rem;
+  color: var(--color-text);
+}
+
 /* ---------- 정의 목록 (myProfile.html) ---------- */
 dl {
   display: grid;

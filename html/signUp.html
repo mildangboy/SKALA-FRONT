@@ -86,76 +86,108 @@
   <div class="layout">
     <main>
       <h2>Sign In / Sign Up</h2>
-      <form action="signUpResult.html" method="get" novalidate>
-        <fieldset>
-          <legend>기본 정보</legend>
 
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab" id="tabSignIn" role="tab" aria-selected="true" aria-controls="signInPanel">로그인</button>
+        <button type="button" class="auth-tab" id="tabSignUp" role="tab" aria-selected="false" aria-controls="signUpPanel">회원가입</button>
+      </div>
+
+      <div id="signInPanel" class="auth-panel" role="tabpanel" aria-labelledby="tabSignIn">
+        <form id="signInForm" novalidate>
           <div class="form-row">
-            <label for="userName">이름 <span class="required-mark" aria-hidden="true">*</span></label>
-            <input type="text" id="userName" name="userName" required minlength="2" placeholder="홍길동" />
-          </div>
-
-          <div class="form-row">
-            <label for="userEmail">이메일 <span class="required-mark" aria-hidden="true">*</span></label>
-            <input type="email" id="userEmail" name="userEmail" required placeholder="example@email.com" />
-          </div>
-
-          <div class="form-row">
-            <label for="birthDate">생년월일 <span class="required-mark" aria-hidden="true">*</span></label>
-            <input type="date" id="birthDate" name="birthDate" required />
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>계정 정보</legend>
-
-          <div class="form-row">
-            <label for="userPw">비밀번호 <span class="required-mark" aria-hidden="true">*</span></label>
-            <input type="password" id="userPw" name="userPw" required minlength="8" placeholder="8자 이상 입력" />
-            <small>영문, 숫자를 포함하여 8자 이상 입력해주세요.</small>
+            <label for="signInEmail">이메일 <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="email" id="signInEmail" name="signInEmail" required placeholder="example@email.com" />
           </div>
 
           <div class="form-row">
-            <label for="userPwConfirm">비밀번호 확인 <span class="required-mark" aria-hidden="true">*</span></label>
-            <input type="password" id="userPwConfirm" name="userPwConfirm" required minlength="8" placeholder="비밀번호를 다시 입력" />
+            <label for="signInPw">비밀번호 <span class="required-mark" aria-hidden="true">*</span></label>
+            <input type="password" id="signInPw" name="signInPw" required minlength="8" placeholder="비밀번호 입력" />
           </div>
-        </fieldset>
 
-        <fieldset>
-          <legend>관심 분야</legend>
-          <div class="form-row choice-group">
-            <label for="interestHtml"><input type="checkbox" id="interestHtml" name="interest" value="HTML/CSS" />HTML/CSS</label>
-            <label for="interestJs"><input type="checkbox" id="interestJs" name="interest" value="JavaScript" />JavaScript</label>
-            <label for="interestReact"><input type="checkbox" id="interestReact" name="interest" value="React" />React</label>
-            <label for="interestAi"><input type="checkbox" id="interestAi" name="interest" value="AI" />AI 서비스</label>
+          <div class="form-actions">
+            <button type="submit">로그인</button>
           </div>
-        </fieldset>
+        </form>
 
-        <fieldset>
-          <legend>자기소개</legend>
-          <div class="form-row">
-            <label for="userBio">한 줄 소개</label>
-            <textarea id="userBio" name="userBio" rows="3" maxlength="120" placeholder="자신을 간단히 소개해주세요."></textarea>
-          </div>
-        </fieldset>
-
-        <fieldset>
-          <legend>약관 동의</legend>
-          <div class="form-row choice-group">
-            <label for="agreeTerms"><input type="checkbox" id="agreeTerms" name="agreeTerms" required />이용약관 및 개인정보 처리방침에 동의합니다. <span class="required-mark" aria-hidden="true">*</span></label>
-          </div>
-        </fieldset>
-
-        <div class="form-actions">
-          <button type="reset">초기화</button>
-          <button type="submit">가입하기</button>
+        <div id="signInNotice" class="auth-notice" hidden>
+          <p>🚧 이 사이트는 백엔드나 실제 계정 저장이 없는 학습용 데모라 로그인 인증은 지원하지 않아요.</p>
+          <a href="index.html" class="btn">메인 페이지로 이동</a>
         </div>
-      </form>
+      </div>
+
+      <div id="signUpPanel" class="auth-panel" role="tabpanel" aria-labelledby="tabSignUp" hidden>
+        <form id="signUpForm" action="signUpResult.html" method="get" novalidate>
+          <fieldset>
+            <legend>기본 정보</legend>
+
+            <div class="form-row">
+              <label for="userName">이름 <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="text" id="userName" name="userName" required minlength="2" placeholder="홍길동" />
+            </div>
+
+            <div class="form-row">
+              <label for="userEmail">이메일 <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="email" id="userEmail" name="userEmail" required placeholder="example@email.com" />
+            </div>
+
+            <div class="form-row">
+              <label for="birthDate">생년월일 <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="date" id="birthDate" name="birthDate" required />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>계정 정보</legend>
+
+            <div class="form-row">
+              <label for="userPw">비밀번호 <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="password" id="userPw" name="userPw" required minlength="8" placeholder="8자 이상 입력" />
+              <small>영문, 숫자를 포함하여 8자 이상 입력해주세요.</small>
+            </div>
+
+            <div class="form-row">
+              <label for="userPwConfirm">비밀번호 확인 <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="password" id="userPwConfirm" name="userPwConfirm" required minlength="8" placeholder="비밀번호를 다시 입력" />
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>관심 분야</legend>
+            <div class="form-row choice-group">
+              <label for="interestHtml"><input type="checkbox" id="interestHtml" name="interest" value="HTML/CSS" />HTML/CSS</label>
+              <label for="interestJs"><input type="checkbox" id="interestJs" name="interest" value="JavaScript" />JavaScript</label>
+              <label for="interestReact"><input type="checkbox" id="interestReact" name="interest" value="React" />React</label>
+              <label for="interestAi"><input type="checkbox" id="interestAi" name="interest" value="AI" />AI 서비스</label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>자기소개</legend>
+            <div class="form-row">
+              <label for="userBio">한 줄 소개</label>
+              <textarea id="userBio" name="userBio" rows="3" maxlength="120" placeholder="자신을 간단히 소개해주세요."></textarea>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>약관 동의</legend>
+            <div class="form-row choice-group">
+              <label for="agreeTerms"><input type="checkbox" id="agreeTerms" name="agreeTerms" required />이용약관 및 개인정보 처리방침에 동의합니다. <span class="required-mark" aria-hidden="true">*</span></label>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button type="reset">초기화</button>
+            <button type="submit">가입하기</button>
+          </div>
+        </form>
+      </div>
     </main>
 
     <aside>
       <h2>안내</h2>
-      <p>모든 <mark>필수(*)</mark> 항목을 빠짐없이 입력해야 가입이 완료됩니다.</p>
+      <p>회원가입 시 모든 <mark>필수(*)</mark> 항목을 빠짐없이 입력해야 가입이 완료됩니다.</p>
+      <p>로그인은 실제 인증 없이 동작만 확인하는 데모예요.</p>
       <div class="dodge-widget">
         <h3 class="dodge-widget-title">⚽ 토트넘 피하기</h3>
         <div class="dodge-game-hud">
