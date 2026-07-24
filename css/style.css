@@ -580,6 +580,17 @@ button[type="reset"]:hover {
   cursor: default;
 }
 
+.weather-fresh-notice {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: var(--color-text-light);
+}
+
+.weather-fresh-notice[hidden] {
+  display: none;
+}
+
 /* ---------- 최신 아스널 소식 (index.html) ---------- */
 .section-heading {
   display: flex;

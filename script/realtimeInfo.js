@@ -10,22 +10,46 @@ const EMIRATES_STADIUM = { name: '에미레이츠 스타디움 (런던)', lat: 5
 
 const weatherBox = document.getElementById('weatherBox');
 const refreshBtn = document.getElementById('weatherRefreshBtn');
+const freshNotice = document.getElementById('weatherFreshNotice');
+
+// 직전에 표시했던 온도/습도를 기억해뒀다가, 새로고침으로 받아온 값이 똑같으면
+// "최신 데이터입니다!" 안내를 잠깐 보여줍니다.
+let lastWeather = null;
+let freshNoticeTimer = null;
+
+function showFreshNotice() {
+  if (!freshNotice) return;
+  clearTimeout(freshNoticeTimer);
+  freshNotice.hidden = false;
+  freshNoticeTimer = setTimeout(() => {
+    freshNotice.hidden = true;
+  }, 3000);
+}
 
 async function loadWeather() {
-  if (!weatherBox) return;
+  if (!weatherBox) return false;
 
   try {
     const data = await getWeather(EMIRATES_STADIUM.lat, EMIRATES_STADIUM.lon);
     const temperature = data.current.temperature_2m;
     const humidity = data.current.relative_humidity_2m;
 
+    const isUnchanged =
+      lastWeather !== null &&
+      lastWeather.temperature === temperature &&
+      lastWeather.humidity === humidity;
+
     weatherBox.innerHTML = `
       <h3>${EMIRATES_STADIUM.name}</h3>
       <p>🌡️ 온도: ${temperature}°C</p>
       <p>💧 습도: ${humidity}%</p>
     `;
+    lastWeather = { temperature, humidity };
+
+    return isUnchanged;
   } catch (error) {
     weatherBox.innerHTML = '<p>날씨 정보를 불러오는 데 실패했습니다. 잠시 후 다시 시도해주세요.</p>';
+    return false;
   }
 }
 
@@ -34,7 +58,10 @@ if (refreshBtn) {
     refreshBtn.disabled = true;
     const originalLabel = refreshBtn.textContent;
     refreshBtn.textContent = '불러오는 중...';
-    await loadWeather();
+    const isUnchanged = await loadWeather();
+    if (isUnchanged) {
+      showFreshNotice();
+    }
     refreshBtn.textContent = originalLabel;
     refreshBtn.disabled = false;
   });
