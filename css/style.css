@@ -567,6 +567,19 @@ button[type="reset"]:hover {
   text-align: center;
 }
 
+.weather-refresh-btn {
+  display: block;
+  width: 100%;
+  margin-top: 0.7rem;
+  padding: 0.55rem 1rem;
+  font-size: 0.72rem;
+}
+
+.weather-refresh-btn:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 /* ---------- 최신 아스널 소식 (index.html) ---------- */
 .section-heading {
   display: flex;
