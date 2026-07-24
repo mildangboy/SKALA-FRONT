@@ -98,6 +98,16 @@
 
   function drawDrop(drop) {
     if (spursImgOk && spursImg.complete && spursImg.naturalWidth > 0) {
+      // 진한 마룬 배경 위에서 짙은 남색 로고가 묻히지 않도록, 로고 뒤에 옅은 골드색
+      // 원형 배지를 깔아준 다음 그 위에 로고를 그림 (플레이어 흰색 캐논과의 대비는 유지)
+      const cx = drop.x + drop.size / 2;
+      const cy = drop.y + drop.size / 2;
+      const badgeRadius = drop.size / 2 + 3;
+      ctx.beginPath();
+      ctx.arc(cx, cy, badgeRadius, 0, Math.PI * 2);
+      ctx.fillStyle = '#f0e2c4';
+      ctx.fill();
+
       // 로고 원본 비율을 유지한 채 drop.size 정사각형 안에 가운데 정렬해서 그림
       const ratio = spursImg.naturalWidth / spursImg.naturalHeight;
       let drawW = drop.size;
