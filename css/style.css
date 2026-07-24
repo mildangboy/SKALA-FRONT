@@ -129,12 +129,43 @@ ul, ol {
 }
 
 .site-header .header-inner {
+  position: relative;
   max-width: 1200px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0.5rem;
+}
+
+/* header-account: 네이버/구글처럼 헤더 우측 상단에 따로 떨어져 있는 로그인/회원가입
+   링크. 가운데의 페이지 이동 메뉴(site-nav)와는 별개로 계정 관련 동작만 담당한다. */
+.header-account {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.4rem 0.9rem;
+  border: 1.5px solid var(--color-maroon-dark);
+  border-radius: 999px;
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: var(--color-maroon-dark);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.header-account:hover,
+.header-account:focus-visible {
+  background-color: var(--color-maroon-dark);
+  color: #fff;
+}
+
+.header-account[aria-current="page"] {
+  background-color: var(--color-maroon-dark);
+  color: #fff;
 }
 
 .crest {
@@ -220,6 +251,18 @@ ul, ol {
   font-size: 0.85rem;
   text-transform: uppercase;
   text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+.site-header.hero .header-account {
+  border-color: var(--color-gold);
+  color: var(--color-gold-light);
+}
+
+.site-header.hero .header-account:hover,
+.site-header.hero .header-account:focus-visible,
+.site-header.hero .header-account[aria-current="page"] {
+  background-color: var(--color-gold);
+  color: var(--color-maroon-dark);
 }
 
 /* ---------- 미니홈피 감성 티커 (스크롤 문구) ---------- */
@@ -1240,6 +1283,12 @@ dd {
 
   .header-top h1 {
     font-size: 1.4rem;
+  }
+
+  .header-account {
+    position: static;
+    margin-top: 0.4rem;
+    align-self: flex-start;
   }
 
   table, thead, tbody, th, td, tr {
