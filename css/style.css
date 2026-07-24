@@ -649,6 +649,17 @@ tbody tr:hover {
   background-color: rgba(239, 1, 7, 0.04);
 }
 
+/* 시간표(Timetable)는 rowspan으로 병합된 칸이 많아서, 행 전체가 아니라
+   실제로 마우스가 올라간 칸(td/th)만 하이라이트되도록 별도로 처리합니다. */
+.class-timetable tbody tr:hover {
+  background-color: transparent;
+}
+
+.class-timetable tbody td:hover,
+.class-timetable tbody th:hover {
+  background-color: rgba(239, 1, 7, 0.1);
+}
+
 /* ---------- 실시간 순위 (myRanking.html) ---------- */
 .table-scroll {
   overflow-x: auto;
