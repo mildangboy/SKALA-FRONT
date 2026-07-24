@@ -1265,3 +1265,9 @@ dd {
   font-size: 0.8rem;
   color: var(--color-text-light);
 }
+
+.trip-map-inset-label {
+  font-family: var(--font-display, inherit);
+  font-size: 5px;
+  letter-spacing: 0.02em;
+}
