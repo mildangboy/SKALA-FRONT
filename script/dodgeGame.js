@@ -33,7 +33,7 @@
   spursImg.onerror = function () {
     spursImgOk = false;
   };
-  spursImg.src = '../images/tottenham-logo.svg';
+  spursImg.src = '../images/tottenham.svg';
 
   const player = {
     width: 56,
@@ -98,7 +98,18 @@
 
   function drawDrop(drop) {
     if (spursImgOk && spursImg.complete && spursImg.naturalWidth > 0) {
-      ctx.drawImage(spursImg, drop.x, drop.y, drop.size, drop.size);
+      // 로고 원본 비율을 유지한 채 drop.size 정사각형 안에 가운데 정렬해서 그림
+      const ratio = spursImg.naturalWidth / spursImg.naturalHeight;
+      let drawW = drop.size;
+      let drawH = drop.size;
+      if (ratio >= 1) {
+        drawH = drop.size / ratio;
+      } else {
+        drawW = drop.size * ratio;
+      }
+      const offsetX = drop.x + (drop.size - drawW) / 2;
+      const offsetY = drop.y + (drop.size - drawH) / 2;
+      ctx.drawImage(spursImg, offsetX, offsetY, drawW, drawH);
     } else {
       // 토트넘 로고 파일이 없을 때의 대체 표시 (남색 원 + S)
       ctx.beginPath();
