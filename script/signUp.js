@@ -76,7 +76,16 @@
       event.preventDefault();
       alert('비밀번호가 일치하지 않습니다. 다시 확인해주세요.');
       pwConfirm.focus();
+      return;
     }
+
+    // 이 폼은 method="get"이라 제출 값이 그대로 signUpResult.html의 URL
+    // 쿼리스트링에 담깁니다. 결과 페이지 화면에는 비밀번호를 표시하지 않지만,
+    // 그것만으로는 부족합니다 — disabled 처리된 입력은 FormData/네이티브 폼
+    // 제출 모두에서 자동으로 제외되므로, 제출 직전 비밀번호 필드를 disabled로
+    // 바꿔 주소창에도 비밀번호가 노출되지 않도록 합니다.
+    if (pw) pw.disabled = true;
+    if (pwConfirm) pwConfirm.disabled = true;
   });
 
   const nameInput = document.getElementById('userName');

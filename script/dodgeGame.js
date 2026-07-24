@@ -203,6 +203,14 @@
     rafId = requestAnimationFrame(loop);
   }
 
+  function stopLoop() {
+    running = false;
+    if (rafId) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  }
+
   function startGame() {
     resetState();
     running = true;
@@ -213,14 +221,39 @@
 
   startBtn.addEventListener('click', startGame);
 
-  window.addEventListener('keydown', function (e) {
-    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') movingLeft = true;
-    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') movingRight = true;
-  });
-  window.addEventListener('keyup', function (e) {
-    if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') movingLeft = false;
-    if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') movingRight = false;
-  });
+  // 이 위젯은 모든 페이지의 사이드바에 들어있어서, SPA 이동을 할 때마다 캔버스가
+  // 새로 생기고 이 스크립트도 매번 처음부터 다시 실행됩니다. 그런데 keydown/keyup
+  // 리스너를 매번 window에 새로 addEventListener 하면, 페이지를 옮겨다닐수록
+  // 리스너가 계속 쌓이고(메모리 누수), 게임 도중 다른 페이지로 넘어가면 이전
+  // 페이지의 애니메이션 루프가 화면에 안 보이는 채로 백그라운드에서 계속 도는
+  // 문제가 있었습니다. nav.js와 같은 방식으로: 이전 인스턴스가 있으면 멈추고,
+  // window 리스너는 세션당 한 번만 등록해서 항상 "현재 활성 인스턴스"로
+  // 위임하도록 합니다.
+  if (window.__dodgeGameActive && window.__dodgeGameActive.stop) {
+    window.__dodgeGameActive.stop();
+  }
+  window.__dodgeGameActive = {
+    stop: stopLoop,
+    setLeft: (v) => { movingLeft = v; },
+    setRight: (v) => { movingRight = v; },
+  };
+
+  if (!window.__dodgeGameGlobalListenersBound) {
+    window.__dodgeGameGlobalListenersBound = true;
+
+    window.addEventListener('keydown', function (e) {
+      const active = window.__dodgeGameActive;
+      if (!active) return;
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') active.setLeft(true);
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') active.setRight(true);
+    });
+    window.addEventListener('keyup', function (e) {
+      const active = window.__dodgeGameActive;
+      if (!active) return;
+      if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') active.setLeft(false);
+      if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') active.setRight(false);
+    });
+  }
 
   // 시작 전 미리보기 (배경 + 플레이어만)
   drawBackground();
