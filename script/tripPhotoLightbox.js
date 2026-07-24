@@ -29,7 +29,4 @@
     img.addEventListener('focus', () => showLightbox(img));
     img.addEventListener('blur', hideLightbox);
   });
-
-  // 오버레이 자체를 클릭해도 닫히도록 (터치 기기 등 보조 수단)
-  overlay.addEventListener('click', hideLightbox);
 })();
