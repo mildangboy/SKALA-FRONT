@@ -36,26 +36,31 @@ SKALA-FRONT/
 │   ├── myProfile.html      About me (기본 정보, 보유 기술, 연도별 주요 경력)
 │   ├── myHoliday.html      Holiday (휴일 취미: 스포츠 시청 / 영화 시청 / 게임)
 │   ├── myClass.html        Timetable (주간 강의 시간표, rowspan/colspan)
-│   ├── myTrip.html         World Trip (다녀온 여행지 6곳 소개, 실제 사진)
+│   ├── myTrip.html         World Trip (다녀온 여행지 6곳 소개 + 방문 41개 도시 세계 지도, 사진 라이트박스)
 │   ├── myRanking.html      Live standings (프리미어리그 순위, 아스널 경기 일정)
-│   ├── signUp.html         Login (회원가입 폼, 필수 항목 검증)
-│   └── signUpResult.html   Sign-up Complete (제출 결과 요약)
+│   ├── signUp.html         Login (회원가입 폼, 필수 항목 검증, 관리자 이스터에그)
+│   ├── signUpResult.html   Sign-up Complete (제출 결과 요약)
+│   └── adminBanner.html    (숨김) 관리자 이스터에그 배너 페이지
 ├── css/
 │   └── style.css           공통 스타일 (Arsenal FC 테마, RWD, 애니메이션)
 ├── script/
-│   ├── nav.js              모바일 햄버거 메뉴
-│   ├── spaNav.js           내부 링크·폼 제출을 가로채는 경량 SPA 라우터
-│   ├── bgm.js               배경음악 위젯 (유튜브 IFrame API, 3곡 재생목록)
-│   ├── weatherAPI.js        ES6 모듈 - Open-Meteo API 호출
-│   ├── realtimeInfo.js      ES6 모듈 - 에미레이츠 스타디움 날씨 렌더링
-│   ├── eplAPI.js            ES6 모듈 - ESPN API로 프리미어리그 순위 조회
-│   ├── fixturesAPI.js       ES6 모듈 - ESPN API로 아스널 경기 일정 조회
-│   ├── myRanking.js         ES6 모듈 - 순위·경기 일정 렌더링
-│   └── signUp.js            회원가입 폼 유효성 검증
+│   ├── nav.js               모바일 햄버거 메뉴
+│   ├── spaNav.js             내부 링크·폼 제출을 가로채는 경량 SPA 라우터
+│   ├── bgm.js                배경음악 위젯 (유튜브 IFrame API, 3곡 재생목록)
+│   ├── weatherAPI.js         ES6 모듈 - Open-Meteo API 호출
+│   ├── realtimeInfo.js       ES6 모듈 - 에미레이츠 스타디움 날씨 렌더링
+│   ├── eplAPI.js             ES6 모듈 - ESPN API로 프리미어리그 순위 조회
+│   ├── fixturesAPI.js        ES6 모듈 - ESPN API로 아스널 경기 일정 조회
+│   ├── myRanking.js          ES6 모듈 - 순위·경기 일정 렌더링
+│   ├── signUp.js             회원가입 폼 유효성 검증 + 관리자 이스터에그 체크
+│   ├── tripPhotoLightbox.js  World Trip 사진 호버 라이트박스
+│   ├── tripMapEasterEgg.js   세계 지도 위 10초 정지 시 이스터에그
+│   └── arsenalEasterEgg.js   아스날 티커 3연속 클릭 이스터에그 (전 페이지 공통)
 └── images/
     ├── logo.svg
     ├── champion.jpeg
-    └── trip-*.jpg           여행지 소개용 실제 사진 6장
+    ├── trip-*.jpg           여행지 소개용 실제 사진 6장
+    └── easter-bunny.png     (선택) 지도 이스터에그용 토끼 이미지 — 없으면 🐰 이모지로 자동 대체
 ```
 
 ## 주요 기능
@@ -67,3 +72,7 @@ SKALA-FRONT/
 - 유튜브 IFrame Player API를 이용한 배경음악 위젯 (재생/일시정지, 이전·다음 곡, 탐색바)
 - 폼 유효성 검증(`required`, `minlength`, JS `checkValidity()`) 및 결과 페이지에서 비밀번호 등 민감 정보 미노출
 - 웹폰트: Anton(헤드라인) · Montserrat(UI) · 에스코어드림(본문)
+- World Trip 방문 도시 세계 지도: 25개국 41개 도시를 인라인 SVG 지도 위에 점으로 표시, 유럽 지역은 좌하단에 확대 지도(inset)로 별도 표시
+- 지도 위 각 도시 점 클릭 시 해당 도시를 구글에서 검색하는 결과가 새 탭으로 열림 (본 지도 + 유럽 확대본 총 71개 점)
+- World Trip 추천 여행지 사진에 마우스를 올리면 화면 중앙에 크게 보여주는 라이트박스
+- 숨겨진 이스터에그 3종: ① 세계 지도 위에서 마우스 포인터를 10초간 정지시키면 부활절 토끼 팝업, ② 상단 "Arsenal — Premier League Champions" 티커를 3연속 클릭하면 전체 화면 아스날 로고가 서서히 나타났다 사라짐(전 페이지 공통), ③ Login 페이지에서 이름·비밀번호·비밀번호 확인을 모두 `admin`으로 입력하면 숨겨진 관리자 배너 페이지로 이동
