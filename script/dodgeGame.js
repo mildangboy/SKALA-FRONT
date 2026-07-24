@@ -1,6 +1,7 @@
-// dodgeGame.js : 토트넘 피하기 게임. 하늘에서 떨어지는 토트넘 로고를 아스날 캐논
-// (플레이어)으로 피하는 캔버스 게임입니다. 시간이 지날수록 스폰 간격이 짧아지고
-// 낙하 속도도 조금씩 빨라집니다. 점수는 버틴 시간(초)입니다.
+// dodgeGame.js : 토트넘 피하기 게임. 모든 페이지의 사이드바(aside) 하단에 들어가는
+// 작은 위젯으로, 하늘에서 떨어지는 토트넘 로고를 아스날 캐논(플레이어)으로 피하는
+// 캔버스 게임입니다. 시간이 지날수록 스폰 간격이 짧아지고 낙하 속도도 조금씩
+// 빨라집니다. 점수는 버틴 시간(초)입니다.
 // 주의: DOMContentLoaded에 걸지 않고 즉시 실행합니다. SPA 방식 페이지 전환(spaNav.js)이
 // 매 이동마다 이 스크립트를 다시 삽입해 재실행하는데, DOMContentLoaded는 문서 전체
 // 수명 중 단 한 번만 발생하므로 그 이후에는 리스너가 걸리지 않기 때문입니다.
@@ -36,11 +37,11 @@
   spursImg.src = '../images/tottenham.svg';
 
   const player = {
-    width: 56,
-    height: 44,
-    x: WIDTH / 2 - 28,
-    y: HEIGHT - 60,
-    speed: 340, // px/sec
+    width: 22,
+    height: 18,
+    x: WIDTH / 2 - 11,
+    y: HEIGHT - 25,
+    speed: 140, // px/sec
   };
 
   let movingLeft = false;
@@ -59,11 +60,11 @@
 
   function fallSpeedPxPerSec() {
     // 시간이 지날수록 낙하 속도도 조금씩 빨라짐
-    return 150 + elapsed * 6;
+    return 62 + elapsed * 2.5;
   }
 
   function spawnDrop() {
-    const size = 34 + Math.random() * 14;
+    const size = 14 + Math.random() * 6;
     drops.push({
       x: Math.random() * (WIDTH - size),
       y: -size,
@@ -102,7 +103,7 @@
       // 원형 배지를 깔아준 다음 그 위에 로고를 그림 (플레이어 흰색 캐논과의 대비는 유지)
       const cx = drop.x + drop.size / 2;
       const cy = drop.y + drop.size / 2;
-      const badgeRadius = drop.size / 2 + 3;
+      const badgeRadius = drop.size / 2 + 1.5;
       ctx.beginPath();
       ctx.arc(cx, cy, badgeRadius, 0, Math.PI * 2);
       ctx.fillStyle = '#f0e2c4';
@@ -139,7 +140,7 @@
   }
 
   function checkCollision() {
-    const pRect = { x: player.x + 6, y: player.y + 6, w: player.width - 12, h: player.height - 12 };
+    const pRect = { x: player.x + 2.5, y: player.y + 2.5, w: player.width - 5, h: player.height - 5 };
     for (let i = 0; i < drops.length; i += 1) {
       const d = drops[i];
       const dRect = { x: d.x + d.size * 0.15, y: d.y + d.size * 0.15, w: d.size * 0.7, h: d.size * 0.7 };

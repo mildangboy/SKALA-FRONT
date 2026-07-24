@@ -60,7 +60,6 @@
         <li><a href="myClass.html" aria-current="page">Timetable</a></li>
         <li><a href="myTrip.html">World Trip</a></li>
         <li><a href="myRanking.html">Live standings</a></li>
-        <li><a href="dodgeGame.html">Dodge Game</a></li>
         <li><a href="gpaCalculator.html">GPA Calculator</a></li>
         <li><a href="signUp.html">Login</a></li>
       </ul>
@@ -144,6 +143,22 @@
     <aside>
       <h2>안내</h2>
       <p>표에서 병합된 셀은 여러 교시 또는 여러 요일에 걸쳐 진행되는 공통 수업을 의미합니다.</p>
+      <div class="dodge-widget">
+        <h3 class="dodge-widget-title">⚽ 토트넘 피하기</h3>
+        <div class="dodge-game-hud">
+          <span>생존 <strong id="dodgeScore">0.0</strong>초</span>
+          <span>최고 <strong id="dodgeBest">0.0</strong>초</span>
+        </div>
+        <div class="dodge-game-stage">
+          <canvas id="dodgeCanvas" width="260" height="200" aria-label="토트넘 피하기 게임 화면"></canvas>
+          <div class="dodge-game-overlay" id="dodgeOverlay">
+            <p class="dodge-game-overlay-title" id="dodgeOverlayTitle">토트넘 피하기</p>
+            <p class="dodge-game-overlay-desc" id="dodgeOverlayDesc">←/→ 또는 A/D로 이동</p>
+            <button type="button" id="dodgeStartBtn" class="btn dodge-widget-start-btn">시작</button>
+          </div>
+        </div>
+        <p class="dodge-game-hint">←/→ 또는 A/D로 이동</p>
+      </div>
     </aside>
   </div>
 
@@ -157,6 +172,7 @@
 
   <script src="../script/nav.js" defer></script>
   <script src="../script/arsenalEasterEgg.js" defer></script>
+  <script src="../script/dodgeGame.js" defer></script>
 </div>
 </div>
 

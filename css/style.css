@@ -1471,31 +1471,41 @@ dd {
   background-color: var(--color-gold-light);
 }
 
-/* ---------- 토트넘 피하기 게임 (dodgeGame.html) ---------- */
-.dodge-game-section {
-  margin-top: 0.5rem;
+/* ---------- 토트넘 피하기 게임 (사이드바 미니 위젯) ---------- */
+.dodge-widget {
+  margin-top: 1.6rem;
+  padding-top: 1.4rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.dodge-widget-title {
+  margin: 0 0 0.6rem;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-maroon-dark);
 }
 
 .dodge-game-hud {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin: 1rem 0 0.7rem;
+  gap: 0.6rem 0.9rem;
+  margin: 0 0 0.6rem;
   font-family: var(--font-heading);
-  font-size: 0.9rem;
+  font-size: 0.72rem;
   color: var(--color-maroon-dark);
 }
 
 .dodge-game-hud strong {
   font-family: var(--font-display, inherit);
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   color: var(--color-red);
 }
 
 .dodge-game-stage {
   position: relative;
-  max-width: 640px;
-  margin: 0 auto;
 }
 
 .dodge-game-stage canvas {
@@ -1514,8 +1524,8 @@ dd {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.9rem;
-  padding: 1.5rem;
+  gap: 0.6rem;
+  padding: 0.9rem;
   background-color: rgba(20, 22, 28, 0.78);
   border-radius: var(--radius);
   text-align: center;
@@ -1528,21 +1538,26 @@ dd {
 .dodge-game-overlay-title {
   margin: 0;
   font-family: var(--font-display, inherit);
-  font-size: 1.4rem;
+  font-size: 1rem;
   color: var(--color-gold-light);
 }
 
 .dodge-game-overlay-desc {
   margin: 0;
-  font-size: 0.9rem;
-  line-height: 1.6;
+  font-size: 0.72rem;
+  line-height: 1.5;
   color: var(--color-gold-light);
 }
 
+.dodge-widget-start-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.72rem;
+}
+
 .dodge-game-hint {
-  margin-top: 0.7rem;
+  margin-top: 0.6rem;
   text-align: center;
-  font-size: 0.85rem;
+  font-size: 0.72rem;
   color: var(--color-text-light);
 }
 
