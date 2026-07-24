@@ -1222,3 +1222,46 @@ dd {
     font-size: 0.82rem;
   }
 }
+
+/* ---------- 여행 지도 (World Trip 페이지) ---------- */
+.trip-map-section {
+  margin-top: 2rem;
+}
+
+.trip-map {
+  margin: 1rem 0;
+  overflow-x: auto;
+  border-radius: var(--radius);
+}
+
+.trip-map svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.trip-map-bg {
+  fill: var(--color-maroon-dark);
+}
+
+.trip-map-land {
+  fill: var(--color-gold);
+  stroke: none;
+}
+
+.trip-map-city {
+  fill: #ffffff;
+  stroke: var(--color-maroon-dark);
+  stroke-width: 0.6;
+  transition: fill 0.15s ease;
+}
+
+.trip-map-city:hover {
+  fill: var(--color-gold-light);
+}
+
+.trip-map-credit {
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-text-light);
+}
