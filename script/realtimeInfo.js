@@ -26,6 +26,22 @@ function showFreshNotice() {
   }, 3000);
 }
 
+// 런던 현지 시각(Europe/London, 서머타임 자동 반영)을 실시간으로 갱신합니다.
+// weatherBox는 새로고침 때마다 innerHTML이 통째로 교체되므로, #londonTime을
+// 매번 새로 조회해서 항상 최신 요소를 가리키도록 합니다.
+const londonTimeFormatter = new Intl.DateTimeFormat('ko-KR', {
+  timeZone: 'Europe/London',
+  hour: '2-digit',
+  minute: '2-digit',
+  hour12: false,
+});
+
+function updateLondonTime() {
+  const el = document.getElementById('londonTime');
+  if (!el) return;
+  el.textContent = londonTimeFormatter.format(new Date());
+}
+
 async function loadWeather() {
   if (!weatherBox) return false;
 
@@ -43,8 +59,10 @@ async function loadWeather() {
       <h3>${EMIRATES_STADIUM.name}</h3>
       <p>🌡️ 온도: ${temperature}°C</p>
       <p>💧 습도: ${humidity}%</p>
+      <p>🕒 현지 시각: <span id="londonTime">--:--</span></p>
     `;
     lastWeather = { temperature, humidity };
+    updateLondonTime();
 
     return isUnchanged;
   } catch (error) {
@@ -68,3 +86,6 @@ if (refreshBtn) {
 }
 
 loadWeather();
+
+// 날씨를 다시 불러오지 않아도 시계는 계속 흐르도록 매 초 갱신
+setInterval(updateLondonTime, 1000);
