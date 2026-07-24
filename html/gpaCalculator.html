@@ -133,13 +133,14 @@
                 <th scope="col">강의 제목</th>
                 <th scope="col">학점</th>
                 <th scope="col">등급</th>
+                <th scope="col">기준</th>
                 <th scope="col">평점</th>
                 <th scope="col" aria-label="삭제"></th>
               </tr>
             </thead>
             <tbody id="gpaTableBody">
               <tr class="gpa-empty-row">
-                <td colspan="5">아직 추가한 과목이 없어요.</td>
+                <td colspan="6">아직 추가한 과목이 없어요.</td>
               </tr>
             </tbody>
           </table>
@@ -147,7 +148,8 @@
 
         <div class="gpa-summary">
           <p>총 이수 학점 <strong id="gpaTotalCredits">0</strong></p>
-          <p>평균 평점 <strong id="gpaAverage">0.00</strong> / <span id="gpaScaleLabel">4.5</span></p>
+          <p>4.5 만점 과목 평균 <strong id="gpaAverage45">추가한 과목 없음</strong></p>
+          <p>4.3 만점 과목 평균 <strong id="gpaAverage43">추가한 과목 없음</strong></p>
         </div>
       </section>
     </main>
@@ -156,6 +158,7 @@
       <h2>안내</h2>
       <p>평균 평점은 학점을 가중치로 사용해 계산돼요 (평점 × 학점의 합 ÷ 총 학점). F 학점도 이수 학점에는 포함돼요.</p>
       <p>4.5 만점은 A+/A0/B+/B0, 4.3 만점은 A+/A/A-/B+/B/B- 형식으로 등급 선택지가 달라져요. 과목을 추가한 뒤 기준을 바꿔도 이미 추가된 과목의 평점은 추가 당시 기준으로 유지돼요.</p>
+      <p>두 기준은 만점 자체가 달라서 하나의 평균으로 합칠 수 없어요. 그래서 평균 평점은 4.5 만점 과목과 4.3 만점 과목으로 나눠서 각각 보여드려요.</p>
       <p>이 페이지를 새로고침하면 입력한 과목 목록은 초기화돼요.</p>
       <div class="dodge-widget">
         <h3 class="dodge-widget-title">⚽ 토트넘 피하기</h3>

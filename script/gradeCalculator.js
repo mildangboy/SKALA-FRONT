@@ -12,12 +12,12 @@
   const scaleSelect = document.getElementById('gpaScale');
   const tableBody = document.getElementById('gpaTableBody');
   const totalCreditsEl = document.getElementById('gpaTotalCredits');
-  const averageEl = document.getElementById('gpaAverage');
-  const scaleLabelEl = document.getElementById('gpaScaleLabel');
+  const average45El = document.getElementById('gpaAverage45');
+  const average43El = document.getElementById('gpaAverage43');
 
   if (
     !form || !titleInput || !creditInput || !gradeSelect || !scaleSelect ||
-    !tableBody || !totalCreditsEl || !averageEl || !scaleLabelEl
+    !tableBody || !totalCreditsEl || !average45El || !average43El
   ) {
     return;
   }
@@ -36,7 +36,7 @@
     },
   };
 
-  let courses = []; // { title, credit, grade, point } — point는 추가 시점의 기준으로 고정됨
+  let courses = []; // { title, credit, grade, point, scale } — point/scale은 추가 시점의 기준으로 고정됨
 
   function formatNumber(n) {
     return Number.isInteger(n) ? String(n) : n.toFixed(1);
@@ -75,15 +75,13 @@
   }
 
   function render() {
-    scaleLabelEl.textContent = scaleSelect.value;
-
     tableBody.innerHTML = '';
 
     if (courses.length === 0) {
       const emptyRow = document.createElement('tr');
       emptyRow.className = 'gpa-empty-row';
       const cell = document.createElement('td');
-      cell.colSpan = 5;
+      cell.colSpan = 6;
       cell.textContent = '아직 추가한 과목이 없어요.';
       emptyRow.appendChild(cell);
       tableBody.appendChild(emptyRow);
@@ -102,6 +100,10 @@
         const gradeCell = document.createElement('td');
         gradeCell.textContent = course.grade;
         row.appendChild(gradeCell);
+
+        const scaleCell = document.createElement('td');
+        scaleCell.textContent = course.scale;
+        row.appendChild(scaleCell);
 
         const pointCell = document.createElement('td');
         pointCell.textContent = course.point.toFixed(1);
@@ -124,15 +126,38 @@
       });
     }
 
+    // 4.5 만점과 4.3 만점은 척도 자체가 달라서 하나의 평균으로 합치면 안 되므로,
+    // 과목을 추가 당시 고정된 기준(scale)별로 나눠서 각각 가중 평균을 계산합니다.
+    // 총 이수 학점(totalCredits)만은 기준과 무관한 단순 합산이라 합쳐도 됩니다.
     let totalCredits = 0;
-    let weightedSum = 0;
+    const bucket = {
+      '4.5': { credits: 0, weightedSum: 0, count: 0 },
+      '4.3': { credits: 0, weightedSum: 0, count: 0 },
+    };
+
     courses.forEach((course) => {
       totalCredits += course.credit;
-      weightedSum += course.point * course.credit;
+      const b = bucket[course.scale];
+      if (!b) return;
+      b.credits += course.credit;
+      b.weightedSum += course.point * course.credit;
+      b.count += 1;
     });
 
     totalCreditsEl.textContent = formatNumber(totalCredits);
-    averageEl.textContent = totalCredits > 0 ? (weightedSum / totalCredits).toFixed(2) : '0.00';
+
+    function formatScaleAverage(scale, el) {
+      const b = bucket[scale];
+      if (b.count === 0) {
+        el.textContent = '추가한 과목 없음';
+        return;
+      }
+      const avg = b.weightedSum / b.credits;
+      el.textContent = `${avg.toFixed(2)} / ${scale} (${b.count}과목)`;
+    }
+
+    formatScaleAverage('4.5', average45El);
+    formatScaleAverage('4.3', average43El);
   }
 
   form.addEventListener('submit', (event) => {
@@ -155,9 +180,10 @@
       return;
     }
 
+    const scale = scaleSelect.value;
     const points = currentPointsTable();
     const point = points[grade] ?? 0;
-    courses.push({ title, credit, grade, point });
+    courses.push({ title, credit, grade, point, scale });
     render();
 
     form.reset();
