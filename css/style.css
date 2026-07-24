@@ -1260,6 +1260,31 @@ dd {
   fill: var(--color-gold-light);
 }
 
+.trip-map-inset-city {
+  fill: #ffffff;
+  stroke: var(--color-maroon-dark);
+  stroke-width: 0.4;
+  transition: fill 0.15s ease;
+}
+
+.trip-map-inset-city:hover {
+  fill: var(--color-gold-light);
+}
+
+.trip-map-link {
+  cursor: pointer;
+}
+
+.trip-map-link:focus-visible circle,
+.trip-map-link:hover circle {
+  fill: var(--color-gold-light);
+}
+
+.trip-map-link:focus-visible {
+  outline: 2px solid var(--color-red);
+  outline-offset: 1px;
+}
+
 .trip-map-credit {
   margin-top: 0.5rem;
   font-size: 0.8rem;
@@ -1270,4 +1295,175 @@ dd {
   font-family: var(--font-display, inherit);
   font-size: 5px;
   letter-spacing: 0.02em;
+}
+
+/* ---------- 여행 사진 라이트박스 (World Trip 페이지) ---------- */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: rgba(20, 22, 28, 0.82);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.lightbox-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.lightbox-overlay img {
+  max-width: min(90vw, 900px);
+  max-height: 85vh;
+  border-radius: var(--radius);
+  border: 3px solid var(--color-gold);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+}
+
+/* ---------- 세계 지도 이스터에그 (World Trip 페이지) ---------- */
+.easter-egg-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: rgba(20, 22, 28, 0.72);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.easter-egg-overlay.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.easter-egg-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem 2.5rem;
+  background-color: var(--color-maroon-dark);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
+  text-align: center;
+}
+
+.easter-egg-bunny {
+  width: 140px;
+  height: 140px;
+  object-fit: contain;
+}
+
+.easter-egg-bunny-fallback {
+  font-size: 5.5rem;
+  line-height: 1;
+}
+
+.easter-egg-text {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: 1.2rem;
+  letter-spacing: 0.03em;
+  color: var(--color-gold-light);
+}
+
+/* ---------- 아스날 티커 3연속 클릭 이스터에그 (전 페이지 공통) ---------- */
+.arsenal-fullscreen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(20, 22, 28, 0.55);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.arsenal-fullscreen-overlay.is-visible {
+  display: flex;
+  pointer-events: auto;
+}
+
+.arsenal-fullscreen-logo {
+  width: min(70vw, 520px);
+  height: auto;
+  filter: drop-shadow(0 0 40px rgba(0, 0, 0, 0.55));
+}
+
+/* ---------- 관리자 이스터에그 배너 페이지 (adminBanner.html) ---------- */
+.admin-banner-page {
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: var(--color-maroon-dark);
+  background-image: radial-gradient(circle at 50% 20%, rgba(183, 154, 99, 0.18), transparent 60%);
+}
+
+.admin-banner-card {
+  max-width: 560px;
+  text-align: center;
+  padding: 3rem 2.5rem;
+  background-color: rgba(20, 22, 28, 0.35);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-hover);
+}
+
+.admin-banner-eyebrow {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+}
+
+.admin-banner-title {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-display, inherit);
+  font-size: 1.6rem;
+  line-height: 1.4;
+  color: var(--color-gold-light);
+}
+
+.admin-banner-sub {
+  margin: 0 0 2rem;
+  font-size: 1.05rem;
+  color: var(--color-gold-light);
+}
+
+.admin-banner-btn {
+  display: inline-block;
+  padding: 0.7rem 1.6rem;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  color: var(--color-maroon-dark);
+  background-color: var(--color-gold);
+  border-radius: var(--radius);
+  text-decoration: none;
+  transition: background-color 0.15s ease;
+}
+
+.admin-banner-btn:hover {
+  background-color: var(--color-gold-light);
 }
