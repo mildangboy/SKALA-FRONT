@@ -38,6 +38,7 @@ SKALA-FRONT/
 │   ├── myClass.html        Timetable (주간 강의 시간표, rowspan/colspan)
 │   ├── myTrip.html         World Trip (다녀온 여행지 6곳 소개 + 방문 41개 도시 세계 지도, 사진 라이트박스)
 │   ├── myRanking.html      Live standings (프리미어리그 순위, 아스널 경기 일정)
+│   ├── gpaCalculator.html  GPA Calculator (강의·학점·등급 추가/삭제, 4.5·4.3 만점 평균 평점 계산)
 │   ├── signUp.html         Login (회원가입 폼, 필수 항목 검증, 관리자 이스터에그)
 │   ├── signUpResult.html   Sign-up Complete (제출 결과 요약)
 │   └── adminBanner.html    (숨김) 관리자 이스터에그 배너 페이지
@@ -55,10 +56,13 @@ SKALA-FRONT/
 │   ├── signUp.js             회원가입 폼 유효성 검증 + 관리자 이스터에그 체크
 │   ├── tripPhotoLightbox.js  World Trip 사진 호버 라이트박스
 │   ├── tripMapEasterEgg.js   세계 지도 위 10초 정지 시 이스터에그
-│   └── arsenalEasterEgg.js   아스날 티커 3연속 클릭 이스터에그 (전 페이지 공통)
+│   ├── arsenalEasterEgg.js   아스날 티커 3연속 클릭 이스터에그 (전 페이지 공통)
+│   ├── dodgeGame.js          토트넘 피하기 게임 (전 페이지 사이드바 위젯)
+│   └── gradeCalculator.js    GPA 계산기 로직 (등급→평점 환산, 4.5/4.3 기준 전환)
 └── images/
     ├── logo.svg
     ├── champion.jpeg
+    ├── tottenham.svg        토트넘 피하기 게임에서 떨어지는 로고
     ├── trip-*.jpg           여행지 소개용 실제 사진 6장
     └── easter-bunny.png     (선택) 지도 이스터에그용 토끼 이미지 — 없으면 🐰 이모지로 자동 대체
 ```
@@ -76,3 +80,5 @@ SKALA-FRONT/
 - 지도 위 각 도시 점 클릭 시 해당 도시를 구글에서 검색하는 결과가 새 탭으로 열림 (본 지도 + 유럽 확대본 총 71개 점)
 - World Trip 추천 여행지 사진에 마우스를 올리면 화면 중앙에 크게 보여주는 라이트박스
 - 숨겨진 이스터에그 3종: ① 세계 지도 위에서 마우스 포인터를 10초간 정지시키면 부활절 토끼 팝업, ② 상단 "Arsenal — Premier League Champions" 티커를 3연속 클릭하면 전체 화면 아스날 로고가 서서히 나타났다 사라짐(전 페이지 공통), ③ Login 페이지에서 이름·비밀번호·비밀번호 확인을 모두 `admin`으로 입력하면 숨겨진 관리자 배너 페이지로 이동
+- GPA Calculator: 강의 제목·학점·등급을 추가/삭제하면 학점 가중 평균으로 평균 평점을 실시간 계산. 4.5 만점(A+/A0/B+/B0…)과 4.3 만점(A+/A/A-/B+/B/B-…) 두 기준을 전환할 수 있고, 이미 추가한 과목의 평점은 추가 당시 기준으로 고정되어 나중에 기준을 바꿔도 값이 바뀌지 않음
+- 토트넘 피하기: 모든 페이지의 사이드바 하단에 있는 미니 게임 위젯. ←/→ 또는 A/D로 아스날 캐논을 움직여 떨어지는 토트넘 로고를 피하고, 시간이 지날수록 더 자주·빠르게 떨어짐. 점수는 생존 시간(초)이며 최고 기록은 브라우저에 저장됨

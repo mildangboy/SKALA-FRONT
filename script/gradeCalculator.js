@@ -22,12 +22,21 @@
     return;
   }
 
+  // 4.5 만점은 국내 대학에서 흔히 쓰는 A+/A0/B+/B0 표기, 4.3 만점은 A+/A/A-/B+/B/B-
+  // 처럼 마이너스 등급이 있는 표기를 씁니다. 두 기준의 등급 이름 자체가 다르므로
+  // 과목을 추가할 때 선택돼 있던 기준의 평점으로 "고정"해서 저장합니다 (아래 참고).
   const GRADE_POINTS = {
     '4.5': { 'A+': 4.5, 'A0': 4.0, 'B+': 3.5, 'B0': 3.0, 'C+': 2.5, 'C0': 2.0, 'D+': 1.5, 'D0': 1.0, 'F': 0.0 },
-    '4.3': { 'A+': 4.3, 'A0': 4.0, 'B+': 3.3, 'B0': 3.0, 'C+': 2.3, 'C0': 2.0, 'D+': 1.3, 'D0': 1.0, 'F': 0.0 },
+    '4.3': {
+      'A+': 4.3, 'A': 4.0, 'A-': 3.7,
+      'B+': 3.3, 'B': 3.0, 'B-': 2.7,
+      'C+': 2.3, 'C': 2.0, 'C-': 1.7,
+      'D+': 1.3, 'D': 1.0, 'D-': 0.7,
+      'F': 0.0,
+    },
   };
 
-  let courses = []; // { title, credit, grade }
+  let courses = []; // { title, credit, grade, point } — point는 추가 시점의 기준으로 고정됨
 
   function formatNumber(n) {
     return Number.isInteger(n) ? String(n) : n.toFixed(1);
@@ -37,8 +46,35 @@
     return GRADE_POINTS[scaleSelect.value] || GRADE_POINTS['4.5'];
   }
 
-  function render() {
+  // 현재 선택된 평점 기준(4.5 / 4.3)에 맞는 등급 옵션으로 등급 select를 다시 채웁니다.
+  // 4.3 기준일 때는 A-, B-, C-, D- 같은 마이너스 등급도 함께 나옵니다.
+  function renderGradeOptions() {
     const points = currentPointsTable();
+    const previousValue = gradeSelect.value;
+
+    gradeSelect.innerHTML = '';
+
+    const placeholder = document.createElement('option');
+    placeholder.value = '';
+    placeholder.textContent = '선택';
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    gradeSelect.appendChild(placeholder);
+
+    Object.keys(points).forEach((grade) => {
+      const option = document.createElement('option');
+      option.value = grade;
+      option.textContent = grade;
+      gradeSelect.appendChild(option);
+    });
+
+    // 기준을 바꿔도 같은 이름의 등급이 새 목록에 있으면 선택 상태를 유지
+    if (Object.prototype.hasOwnProperty.call(points, previousValue)) {
+      gradeSelect.value = previousValue;
+    }
+  }
+
+  function render() {
     scaleLabelEl.textContent = scaleSelect.value;
 
     tableBody.innerHTML = '';
@@ -68,7 +104,7 @@
         row.appendChild(gradeCell);
 
         const pointCell = document.createElement('td');
-        pointCell.textContent = (points[course.grade] ?? 0).toFixed(1);
+        pointCell.textContent = course.point.toFixed(1);
         row.appendChild(pointCell);
 
         const deleteCell = document.createElement('td');
@@ -91,9 +127,8 @@
     let totalCredits = 0;
     let weightedSum = 0;
     courses.forEach((course) => {
-      const point = points[course.grade] ?? 0;
       totalCredits += course.credit;
-      weightedSum += point * course.credit;
+      weightedSum += course.point * course.credit;
     });
 
     totalCreditsEl.textContent = formatNumber(totalCredits);
@@ -120,14 +155,23 @@
       return;
     }
 
-    courses.push({ title, credit, grade });
+    const points = currentPointsTable();
+    const point = points[grade] ?? 0;
+    courses.push({ title, credit, grade, point });
     render();
 
     form.reset();
+    renderGradeOptions();
     titleInput.focus();
   });
 
-  scaleSelect.addEventListener('change', render);
+  scaleSelect.addEventListener('change', () => {
+    // 등급 이름 자체가 기준마다 달라서(4.5=A0/B0, 4.3=A/A-/B/B-...), 이미 추가한
+    // 과목의 평점은 그대로 두고 앞으로 추가할 과목의 등급 선택지만 새로 채웁니다.
+    renderGradeOptions();
+    render();
+  });
 
+  renderGradeOptions();
   render();
 })();
