@@ -660,6 +660,15 @@ tbody tr:hover {
   background-color: rgba(239, 1, 7, 0.1);
 }
 
+/* 시간표는 줄무늬 없이 점심시간 행만 회색으로 구분합니다. */
+.class-timetable tbody tr:nth-child(even) {
+  background-color: transparent;
+}
+
+.class-timetable tbody tr.lunch-row {
+  background-color: #fafafb;
+}
+
 /* ---------- 실시간 순위 (myRanking.html) ---------- */
 .table-scroll {
   overflow-x: auto;
