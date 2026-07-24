@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SKALA-FRONT | 가입 완료</title>
+  <title>SKALA-FRONT | GPA Calculator</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -42,7 +42,7 @@
         </div>
         <h1>Good Day, Martin!</h1>
       </a>
-      <p class="header-tagline">회원가입 완료</p>
+      <p class="header-tagline">GPA Calculator</p>
     </div>
   </header>
 
@@ -61,8 +61,8 @@
         <li><a href="myTrip.html">World Trip</a></li>
         <li><a href="myRanking.html">Live standings</a></li>
         <li><a href="dodgeGame.html">Dodge Game</a></li>
-        <li><a href="gpaCalculator.html">GPA Calculator</a></li>
-        <li><a href="signUp.html" aria-current="page">Login</a></li>
+        <li><a href="gpaCalculator.html" aria-current="page">GPA Calculator</a></li>
+        <li><a href="signUp.html">Login</a></li>
       </ul>
     </div>
   </nav>
@@ -86,18 +86,83 @@
 
   <div class="layout">
     <main>
-      <h2>🎉 Sign-up Complete!</h2>
-      <p>입력하신 정보는 아래와 같습니다.</p>
-      <dl id="resultList">
-        <dt>정보</dt>
-        <dd>불러오는 중...</dd>
-      </dl>
-      <p><a class="btn" href="index.html">홈으로 돌아가기</a></p>
+      <section class="gpa-section">
+        <h2>성적 계산기</h2>
+        <p>강의 제목과 학점, 등급을 추가하면 학점으로 가중 평균한 평균 평점이 자동으로 계산돼요.</p>
+
+        <div class="form-row gpa-scale-row">
+          <label for="gpaScale">평점 환산 기준</label>
+          <select id="gpaScale">
+            <option value="4.5" selected>4.5 만점</option>
+            <option value="4.3">4.3 만점</option>
+          </select>
+        </div>
+
+        <form id="gpaForm" class="gpa-form" novalidate>
+          <div class="gpa-form-grid">
+            <div class="form-row">
+              <label for="courseTitle">강의 제목 <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="text" id="courseTitle" required placeholder="예: 자료구조" />
+            </div>
+
+            <div class="form-row">
+              <label for="courseCredit">학점 <span class="required-mark" aria-hidden="true">*</span></label>
+              <input type="number" id="courseCredit" min="0.5" max="6" step="0.5" required placeholder="예: 3" />
+            </div>
+
+            <div class="form-row">
+              <label for="courseGrade">등급 <span class="required-mark" aria-hidden="true">*</span></label>
+              <select id="courseGrade" required>
+                <option value="" selected disabled>선택</option>
+                <option value="A+">A+</option>
+                <option value="A0">A0</option>
+                <option value="B+">B+</option>
+                <option value="B0">B0</option>
+                <option value="C+">C+</option>
+                <option value="C0">C0</option>
+                <option value="D+">D+</option>
+                <option value="D0">D0</option>
+                <option value="F">F</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit">과목 추가</button>
+          </div>
+        </form>
+
+        <div class="table-scroll">
+          <table class="gpa-table">
+            <caption>추가한 과목</caption>
+            <thead>
+              <tr>
+                <th scope="col">강의 제목</th>
+                <th scope="col">학점</th>
+                <th scope="col">등급</th>
+                <th scope="col">평점</th>
+                <th scope="col" aria-label="삭제"></th>
+              </tr>
+            </thead>
+            <tbody id="gpaTableBody">
+              <tr class="gpa-empty-row">
+                <td colspan="5">아직 추가한 과목이 없어요.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="gpa-summary">
+          <p>총 이수 학점 <strong id="gpaTotalCredits">0</strong></p>
+          <p>평균 평점 <strong id="gpaAverage">0.00</strong> / <span id="gpaScaleLabel">4.5</span></p>
+        </div>
+      </section>
     </main>
 
     <aside>
       <h2>안내</h2>
-      <p>본 페이지는 학습용 데모이며, 입력하신 정보는 서버에 저장되지 않고 화면에만 표시됩니다.</p>
+      <p>평균 평점은 학점을 가중치로 사용해 계산돼요 (평점 × 학점의 합 ÷ 총 학점). F 학점도 이수 학점에는 포함돼요.</p>
+      <p>이 페이지를 새로고침하면 입력한 과목 목록은 초기화돼요.</p>
     </aside>
   </div>
 
@@ -105,57 +170,13 @@
     <p>&copy; 2026 SKALA-FRONT. SK(주) AX AI LEADER ACADEMY.</p>
   </footer>
 
-  <script>
-    // 주의: DOMContentLoaded에 걸지 않고 즉시 실행합니다. SPA 방식 페이지 전환(spaNav.js)이
-    // 매 이동마다 이 스크립트를 다시 삽입해 재실행하는데, DOMContentLoaded는 문서 전체
-    // 수명 중 단 한 번만 발생하므로 그 이후에는 리스너가 걸리지 않기 때문입니다.
-    (function () {
-      const resultList = document.getElementById('resultList');
-      const params = new URLSearchParams(window.location.search);
-
-      // 비밀번호/비밀번호 확인은 보안상의 이유로 결과 화면에 표시하지 않습니다.
-      const fieldLabels = {
-        userName: '이름',
-        userEmail: '이메일',
-        birthDate: '생년월일',
-        interest: '관심 분야',
-        userBio: '한 줄 소개',
-        agreeTerms: '약관 동의',
-      };
-
-      if ([...params.keys()].length === 0) {
-        resultList.innerHTML = '<dt>알림</dt><dd>전달된 가입 정보가 없습니다. 회원가입 페이지에서 폼을 제출해주세요.</dd>';
-        return;
-      }
-
-      let html = '';
-      for (const key of Object.keys(fieldLabels)) {
-        const label = fieldLabels[key];
-
-        if (key === 'interest') {
-          const values = params.getAll('interest');
-          html += `<dt>${label}</dt><dd>${values.length ? values.join(', ') : '선택 안 함'}</dd>`;
-          continue;
-        }
-
-        if (key === 'agreeTerms') {
-          html += `<dt>${label}</dt><dd>${params.get('agreeTerms') ? '동의함 ✅' : '동의 안 함'}</dd>`;
-          continue;
-        }
-
-        const value = params.get(key);
-        html += `<dt>${label}</dt><dd>${value ? value : '입력 안 함'}</dd>`;
-      }
-
-      resultList.innerHTML = html;
-    })();
-  </script>
   <div id="arsenalEasterEgg" class="arsenal-fullscreen-overlay" aria-hidden="true">
     <img src="../images/logo.svg" alt="Arsenal" class="arsenal-fullscreen-logo" />
   </div>
 
   <script src="../script/nav.js" defer></script>
   <script src="../script/arsenalEasterEgg.js" defer></script>
+  <script src="../script/gradeCalculator.js" defer></script>
 </div>
 </div>
 

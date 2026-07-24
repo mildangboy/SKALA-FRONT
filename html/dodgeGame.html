@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SKALA-FRONT | 가입 완료</title>
+  <title>SKALA-FRONT | Dodge Game</title>
   <link rel="stylesheet" href="../css/style.css" />
 </head>
 <body>
@@ -42,7 +42,7 @@
         </div>
         <h1>Good Day, Martin!</h1>
       </a>
-      <p class="header-tagline">회원가입 완료</p>
+      <p class="header-tagline">Dodge Game</p>
     </div>
   </header>
 
@@ -60,9 +60,9 @@
         <li><a href="myClass.html">Timetable</a></li>
         <li><a href="myTrip.html">World Trip</a></li>
         <li><a href="myRanking.html">Live standings</a></li>
-        <li><a href="dodgeGame.html">Dodge Game</a></li>
+        <li><a href="dodgeGame.html" aria-current="page">Dodge Game</a></li>
         <li><a href="gpaCalculator.html">GPA Calculator</a></li>
-        <li><a href="signUp.html" aria-current="page">Login</a></li>
+        <li><a href="signUp.html">Login</a></li>
       </ul>
     </div>
   </nav>
@@ -86,18 +86,31 @@
 
   <div class="layout">
     <main>
-      <h2>🎉 Sign-up Complete!</h2>
-      <p>입력하신 정보는 아래와 같습니다.</p>
-      <dl id="resultList">
-        <dt>정보</dt>
-        <dd>불러오는 중...</dd>
-      </dl>
-      <p><a class="btn" href="index.html">홈으로 돌아가기</a></p>
+      <section class="dodge-game-section">
+        <h2>토트넘 피하기</h2>
+        <p>하늘에서 쏟아지는 토트넘 로고를 피해 최대한 오래 버텨보세요. 시간이 지날수록 점점 더 많이 떨어집니다. 점수는 버틴 시간이에요.</p>
+
+        <div class="dodge-game-hud">
+          <span class="dodge-game-score">생존 시간 <strong id="dodgeScore">0.0</strong>초</span>
+          <span class="dodge-game-best">최고 기록 <strong id="dodgeBest">0.0</strong>초</span>
+        </div>
+
+        <div class="dodge-game-stage">
+          <canvas id="dodgeCanvas" width="640" height="480" aria-label="토트넘 피하기 게임 화면"></canvas>
+          <div class="dodge-game-overlay" id="dodgeOverlay">
+            <p class="dodge-game-overlay-title" id="dodgeOverlayTitle">토트넘 피하기</p>
+            <p class="dodge-game-overlay-desc" id="dodgeOverlayDesc">←/→ 또는 A/D 키로 좌우 이동해서<br />토트넘 로고에 닿지 않고 버티세요!</p>
+            <button type="button" id="dodgeStartBtn" class="btn">게임 시작</button>
+          </div>
+        </div>
+
+        <p class="dodge-game-hint">조작: ←/→ 또는 A/D 키로 좌우 이동</p>
+      </section>
     </main>
 
     <aside>
       <h2>안내</h2>
-      <p>본 페이지는 학습용 데모이며, 입력하신 정보는 서버에 저장되지 않고 화면에만 표시됩니다.</p>
+      <p>토트넘 로고에 닿는 순간 게임이 종료돼요. 최고 기록은 이 브라우저에 저장됩니다.</p>
     </aside>
   </div>
 
@@ -105,57 +118,13 @@
     <p>&copy; 2026 SKALA-FRONT. SK(주) AX AI LEADER ACADEMY.</p>
   </footer>
 
-  <script>
-    // 주의: DOMContentLoaded에 걸지 않고 즉시 실행합니다. SPA 방식 페이지 전환(spaNav.js)이
-    // 매 이동마다 이 스크립트를 다시 삽입해 재실행하는데, DOMContentLoaded는 문서 전체
-    // 수명 중 단 한 번만 발생하므로 그 이후에는 리스너가 걸리지 않기 때문입니다.
-    (function () {
-      const resultList = document.getElementById('resultList');
-      const params = new URLSearchParams(window.location.search);
-
-      // 비밀번호/비밀번호 확인은 보안상의 이유로 결과 화면에 표시하지 않습니다.
-      const fieldLabels = {
-        userName: '이름',
-        userEmail: '이메일',
-        birthDate: '생년월일',
-        interest: '관심 분야',
-        userBio: '한 줄 소개',
-        agreeTerms: '약관 동의',
-      };
-
-      if ([...params.keys()].length === 0) {
-        resultList.innerHTML = '<dt>알림</dt><dd>전달된 가입 정보가 없습니다. 회원가입 페이지에서 폼을 제출해주세요.</dd>';
-        return;
-      }
-
-      let html = '';
-      for (const key of Object.keys(fieldLabels)) {
-        const label = fieldLabels[key];
-
-        if (key === 'interest') {
-          const values = params.getAll('interest');
-          html += `<dt>${label}</dt><dd>${values.length ? values.join(', ') : '선택 안 함'}</dd>`;
-          continue;
-        }
-
-        if (key === 'agreeTerms') {
-          html += `<dt>${label}</dt><dd>${params.get('agreeTerms') ? '동의함 ✅' : '동의 안 함'}</dd>`;
-          continue;
-        }
-
-        const value = params.get(key);
-        html += `<dt>${label}</dt><dd>${value ? value : '입력 안 함'}</dd>`;
-      }
-
-      resultList.innerHTML = html;
-    })();
-  </script>
   <div id="arsenalEasterEgg" class="arsenal-fullscreen-overlay" aria-hidden="true">
     <img src="../images/logo.svg" alt="Arsenal" class="arsenal-fullscreen-logo" />
   </div>
 
   <script src="../script/nav.js" defer></script>
   <script src="../script/arsenalEasterEgg.js" defer></script>
+  <script src="../script/dodgeGame.js" defer></script>
 </div>
 </div>
 

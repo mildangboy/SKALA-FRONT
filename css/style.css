@@ -786,6 +786,8 @@ form legend {
 .form-row input[type="email"],
 .form-row input[type="password"],
 .form-row input[type="date"],
+.form-row input[type="number"],
+.form-row select,
 .form-row textarea {
   width: 100%;
   padding: 0.9rem 1rem;
@@ -793,10 +795,12 @@ form legend {
   border-radius: 8px;
   font-family: inherit;
   font-size: 1.05rem;
+  background-color: var(--color-surface);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .form-row input:focus,
+.form-row select:focus,
 .form-row textarea:focus {
   outline: none;
   border-color: var(--color-red);
@@ -1465,4 +1469,134 @@ dd {
 
 .admin-banner-btn:hover {
   background-color: var(--color-gold-light);
+}
+
+/* ---------- 토트넘 피하기 게임 (dodgeGame.html) ---------- */
+.dodge-game-section {
+  margin-top: 0.5rem;
+}
+
+.dodge-game-hud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 1rem 0 0.7rem;
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  color: var(--color-maroon-dark);
+}
+
+.dodge-game-hud strong {
+  font-family: var(--font-display, inherit);
+  font-size: 1.1rem;
+  color: var(--color-red);
+}
+
+.dodge-game-stage {
+  position: relative;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.dodge-game-stage canvas {
+  display: block;
+  width: 100%;
+  height: auto;
+  background-color: var(--color-maroon-dark);
+  border: 2px solid var(--color-gold);
+  border-radius: var(--radius);
+}
+
+.dodge-game-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 1.5rem;
+  background-color: rgba(20, 22, 28, 0.78);
+  border-radius: var(--radius);
+  text-align: center;
+}
+
+.dodge-game-overlay.is-hidden {
+  display: none;
+}
+
+.dodge-game-overlay-title {
+  margin: 0;
+  font-family: var(--font-display, inherit);
+  font-size: 1.4rem;
+  color: var(--color-gold-light);
+}
+
+.dodge-game-overlay-desc {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: var(--color-gold-light);
+}
+
+.dodge-game-hint {
+  margin-top: 0.7rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--color-text-light);
+}
+
+/* ---------- 성적 계산기 (gpaCalculator.html) ---------- */
+.gpa-scale-row {
+  max-width: 260px;
+}
+
+.gpa-form-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 1rem 1.2rem;
+}
+
+@media (max-width: 640px) {
+  .gpa-form-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.gpa-table {
+  margin-top: 1.4rem;
+}
+
+.gpa-empty-row td {
+  text-align: center;
+  color: var(--color-text-light);
+}
+
+.gpa-delete-btn {
+  padding: 0.4rem 0.8rem;
+  font-size: 0.72rem;
+}
+
+.gpa-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 2rem;
+  margin-top: 1.2rem;
+  padding: 1rem 1.2rem;
+  background-color: var(--color-maroon-dark);
+  border-radius: var(--radius);
+}
+
+.gpa-summary p {
+  margin: 0;
+  color: var(--color-gold-light);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+}
+
+.gpa-summary strong {
+  font-family: var(--font-display, inherit);
+  font-size: 1.3rem;
+  color: var(--color-gold);
+  margin: 0 0.15em;
 }
