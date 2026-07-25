@@ -31,6 +31,7 @@ python3 -m http.server 8000
 
 ```
 SKALA-FRONT/
+├── index.html              루트 진입점 (GitHub Pages 등에서 짧은 주소로 접속 시 html/index.html로 자동 이동)
 ├── html/
 │   ├── index.html          홈 (히어로 헤더, 아스널 최신 소식, 에미레이츠 스타디움 날씨)
 │   ├── myProfile.html      About me (기본 정보, 보유 기술, 연도별 주요 경력)
@@ -47,7 +48,7 @@ SKALA-FRONT/
 ├── script/
 │   ├── nav.js               모바일 햄버거 메뉴
 │   ├── spaNav.js             내부 링크·폼 제출을 가로채는 경량 SPA 라우터
-│   ├── bgm.js                배경음악 위젯 (유튜브 IFrame API, 3곡 재생목록)
+│   ├── bgm.js                배경음악 위젯 (유튜브 IFrame API, 3곡 재생목록, 재생/일시정지/음소거/이전·다음 곡, 재생 불가 곡 자동 건너뛰기)
 │   ├── weatherAPI.js         ES6 모듈 - Open-Meteo API 호출
 │   ├── realtimeInfo.js       ES6 모듈 - 에미레이츠 스타디움 날씨 렌더링
 │   ├── eplAPI.js             ES6 모듈 - ESPN API로 프리미어리그 순위 조회
@@ -74,7 +75,7 @@ SKALA-FRONT/
 - ES6 모듈(`import`/`export`)로 분리한 실시간 날씨 위젯(Open-Meteo API) 및 실시간 프리미어리그 순위·아스널 경기 일정(ESPN API)
 - 에미레이츠 스타디움 날씨 위젯: 새로고침 버튼으로 다시 불러올 수 있고, 새로 받아온 값이 직전과 같으면 "최신 데이터입니다!" 안내가 잠깐 표시됨. 런던 현지 시각(Europe/London, 서머타임 자동 반영)도 매초 갱신되어 함께 표시됨
 - `fetch()` 기반 경량 SPA 라우팅으로, 페이지를 이동해도 배경음악이 끊기지 않음
-- 유튜브 IFrame Player API를 이용한 배경음악 위젯 (재생/일시정지, 이전·다음 곡, 탐색바)
+- 유튜브 IFrame Player API를 이용한 배경음악 위젯 (재생/일시정지, 이전·다음 곡, 탐색바, 음소거). 유튜브 임베드 특성상 광고가 붙거나(수익화 채널) 특정 영상이 지역/저작권 사유로 재생 불가일 수 있는데, 후자는 다음 곡으로 자동 전환하고 전부 막혀있으면 "유튜브 오류" 안내를 표시함. 광고는 일시정지·건너뛰기가 안 되므로 음소거 버튼과 마퀴로 흐르는 안내 문구를 함께 제공
 - 오른쪽 위 "Sign In / Sign Up" 배지(네이버·구글 스타일)로 로그인/회원가입 페이지 진입. 로그인 탭은 실제 인증 없이 데모 안내만 보여주고, 회원가입 탭은 실제 폼 유효성 검증(`required`, `minlength`, JS `checkValidity()`)을 거침
 - 회원가입 폼은 `method="get"`이라 제출 값이 URL 쿼리스트링에 담기는데, 비밀번호 입력란은 제출 직전 `disabled` 처리해서 결과 페이지 화면은 물론 주소창에도 비밀번호가 노출되지 않음
 - 웹폰트: Anton(헤드라인) · Montserrat(UI) · 에스코어드림(본문)

@@ -1174,11 +1174,51 @@ dd {
 
 .bgm-ad-notice {
   margin: 0.3rem 0 0;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.bgm-ad-notice-track {
+  display: inline-block;
+  padding-left: 100%;
   color: rgba(255, 255, 255, 0.55);
   font-family: var(--font-heading);
   font-size: 0.6rem;
   font-weight: 600;
   letter-spacing: 0.01em;
+  animation: bgmMarquee 11s linear infinite;
+}
+
+@keyframes bgmMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bgm-ad-notice-track {
+    animation: none;
+    padding-left: 0;
+  }
+
+  .bgm-ad-notice {
+    white-space: normal;
+  }
+}
+
+.bgm-mute-icon-off {
+  display: none;
+}
+
+.bgm-control-btn.is-muted .bgm-mute-icon-on {
+  display: none;
+}
+
+.bgm-control-btn.is-muted .bgm-mute-icon-off {
+  display: inline-flex;
 }
 
 .bgm-seek {
@@ -1237,6 +1277,9 @@ dd {
 }
 
 .bgm-control-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   padding: 0.2rem 0.4rem;

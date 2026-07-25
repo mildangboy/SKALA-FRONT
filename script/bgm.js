@@ -58,6 +58,7 @@
     const nextBtn = document.getElementById('bgmNext');
     const playPauseBtn = document.getElementById('bgmPlayPause');
     const playPauseIcon = playPauseBtn ? playPauseBtn.querySelector('.bgm-playpause-icon') : null;
+    const muteBtn = document.getElementById('bgmMute');
     if (!toggle || !playerBox) return;
 
     if (window.location.protocol === 'file:') {
@@ -84,6 +85,34 @@
       // 회색/파란 배경 아이콘으로 렌더링되어 마룬/골드 테마와 어울리지 않습니다.
       // 변형 선택자 없는 일반 텍스트 기호(▶/⏸)를 사용해 색상을 완전히 제어합니다.
       if (playPauseIcon) playPauseIcon.textContent = playing ? '⏸' : '▶';
+    }
+
+    // 음소거 버튼: 광고를 포함해 지금 나오고 있는 소리 전체를 끕니다(곡만 무음
+    // 처리하는 게 아니라 플레이어 자체를 mute하는 거라, 광고 소리도 같이 꺼집니다).
+    // 아이콘은 이모지 대신 currentColor를 쓰는 SVG 2개를 켜고 끄는 방식이라(테마
+    // 색상에 맞춰 자동으로 골드/화이트로 바뀜) 재생/일시정지 아이콘과 스타일이 통일됩니다.
+    function setMuteUI(muted) {
+      if (!muteBtn) return;
+      muteBtn.classList.toggle('is-muted', muted);
+      muteBtn.setAttribute('aria-label', muted ? '음소거 해제' : '음소거');
+    }
+
+    function toggleMute() {
+      if (!isReady) return;
+      if (player.isMuted && player.isMuted()) {
+        player.unMute();
+        setMuteUI(false);
+      } else {
+        player.mute();
+        setMuteUI(true);
+      }
+    }
+
+    if (muteBtn) {
+      muteBtn.addEventListener('click', () => {
+        muteBtn.blur();
+        toggleMute();
+      });
     }
 
     function updateTrackInfo() {
