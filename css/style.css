@@ -1172,6 +1172,15 @@ dd {
   display: none;
 }
 
+.bgm-ad-notice {
+  margin: 0.3rem 0 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-family: var(--font-heading);
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
 .bgm-seek {
   width: 100%;
   height: 4px;
