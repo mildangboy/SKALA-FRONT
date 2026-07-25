@@ -1,9 +1,10 @@
 // bgm.js : 유튜브 IFrame Player API를 이용한 배경음악(BGM) 위젯
-// 재생목록: RESCENE - Busy Boy → Tray B - New New (Prod. by GroovyRoom) →
-// 예린(YERIN) - Wavy 순서로 자동 재생되며, 마지막 곡이 끝나면 처음 곡으로 돌아갑니다.
-// (유튜브 임베드 사용 — 실제 음원 파일을 직접 호스팅하지 않습니다. 이전에 쓰던
-// Fall Out Boy/Kendrick Lamar/Nas 공식 뮤직비디오 3곡은 한국에서 임베드 재생이
-// 막혀있어서 이 3곡으로 교체했습니다.)
+// 재생목록: Robin Hustin x TobiMorrow - Light It Up (feat. Jex) →
+// Unknown Brain - Superhero (feat. Chris Linton) 순서로 자동 재생되며, 마지막
+// 곡이 끝나면 처음 곡으로 돌아갑니다. 둘 다 NCS(No Copyright Sounds) 공식 배포
+// 트랙이라 광고 없이, 임베드 제한 걱정 없이 재생됩니다. (유튜브 임베드 사용 —
+// 실제 음원 파일을 직접 호스팅하지 않습니다. 이전에 쓰던 공식 뮤직비디오/K-pop
+// 트랙들은 한국 임베드 제한 또는 광고 문제가 있어서 NCS 트랙으로 교체했습니다.)
 //
 // 참고: 대부분의 브라우저는 사용자 조작 없이 소리가 나오는 자동재생을 차단합니다.
 // 아래 코드는 (1) 페이지 로드시 자동재생을 우선 시도하고, (2) 브라우저가 이를 막을 경우
@@ -11,9 +12,8 @@
 // 폴백을 함께 둬서, 사실상 자동재생에 가깝게 동작하도록 했습니다.
 (function () {
   const TRACKS = [
-    { videoId: 'c70TkZH7fr0', title: 'Busy Boy', artist: 'RESCENE' },
-    { videoId: 's0-m0gHYTjA', title: 'New New (Prod. by GroovyRoom)', artist: 'Tray B' },
-    { videoId: '5nNKcrzKc1U', title: 'Wavy', artist: '예린(YERIN)' },
+    { videoId: 'bdE_SyHad90', title: 'Light It Up (feat. Jex)', artist: 'Robin Hustin x TobiMorrow' },
+    { videoId: 'LHvYrn3FAgI', title: 'Superhero (feat. Chris Linton)', artist: 'Unknown Brain' },
   ];
   let trackIndex = 0;
   let player = null;
