@@ -1,7 +1,9 @@
 // bgm.js : 유튜브 IFrame Player API를 이용한 배경음악(BGM) 위젯
-// 재생목록: Fall Out Boy - The Last of the Real Ones → Kendrick Lamar - HUMBLE. →
-// Nas - Nas Is Like 순서로 자동 재생되며, 마지막 곡이 끝나면 처음 곡으로 돌아갑니다.
-// (모두 공식 뮤직비디오, 유튜브 임베드 사용 — 실제 음원 파일을 직접 호스팅하지 않습니다.)
+// 재생목록: RESCENE - Busy Boy → Tray B - New New (Prod. by GroovyRoom) →
+// 예린(YERIN) - Wavy 순서로 자동 재생되며, 마지막 곡이 끝나면 처음 곡으로 돌아갑니다.
+// (유튜브 임베드 사용 — 실제 음원 파일을 직접 호스팅하지 않습니다. 이전에 쓰던
+// Fall Out Boy/Kendrick Lamar/Nas 공식 뮤직비디오 3곡은 한국에서 임베드 재생이
+// 막혀있어서 이 3곡으로 교체했습니다.)
 //
 // 참고: 대부분의 브라우저는 사용자 조작 없이 소리가 나오는 자동재생을 차단합니다.
 // 아래 코드는 (1) 페이지 로드시 자동재생을 우선 시도하고, (2) 브라우저가 이를 막을 경우
@@ -9,9 +11,9 @@
 // 폴백을 함께 둬서, 사실상 자동재생에 가깝게 동작하도록 했습니다.
 (function () {
   const TRACKS = [
-    { videoId: '7YAAyUFL1GQ', title: 'The Last of the Real Ones', artist: 'Fall Out Boy' },
-    { videoId: 'tvTRZJ-4EyI', title: 'HUMBLE.', artist: 'Kendrick Lamar' },
-    { videoId: 'VC4ORS5n9Hg', title: 'Nas Is Like', artist: 'Nas' },
+    { videoId: 'c70TkZH7fr0', title: 'Busy Boy', artist: 'RESCENE' },
+    { videoId: 's0-m0gHYTjA', title: 'New New (Prod. by GroovyRoom)', artist: 'Tray B' },
+    { videoId: '5nNKcrzKc1U', title: 'Wavy', artist: '예린(YERIN)' },
   ];
   let trackIndex = 0;
   let player = null;
@@ -25,13 +27,18 @@
     return `${m}:${String(s).padStart(2, '0')}`;
   }
 
-  function loadYouTubeAPI(onApiReady) {
+  function loadYouTubeAPI(onApiReady, onApiError) {
     if (window.YT && window.YT.Player) {
       onApiReady();
       return;
     }
     const tag = document.createElement('script');
     tag.src = 'https://www.youtube.com/iframe_api';
+    // 네트워크 문제 등으로 유튜브 IFrame API 스크립트 자체를 못 불러오면
+    // onYouTubeIframeAPIReady가 영영 호출되지 않으므로, 이 경우를 따로 감지합니다.
+    tag.onerror = () => {
+      if (onApiError) onApiError();
+    };
     document.head.appendChild(tag);
     window.onYouTubeIframeAPIReady = onApiReady;
   }
@@ -120,6 +127,21 @@
 
     updateTrackInfo();
 
+    // 임베드 재생이 막힌 영상(저작권사가 다른 사이트 재생을 금지했거나 지역 제한이
+    // 걸린 경우)을 만나면 YouTube가 onError 콜백으로 알려줍니다. 예전에는 이 콜백
+    // 자체가 없어서 에러가 콘솔에도 안 뜨고 그냥 조용히 멈춰버렸습니다. 이제는
+    // 에러가 나면 다음 곡으로 자동으로 넘기고, 재생목록의 모든 곡이 다 막혀있는
+    // 경우(연속 에러가 트랙 수만큼 쌓이면)에는 무한 루프를 돌지 않고 안내 문구만
+    // 표시하고 멈춥니다.
+    let consecutiveErrors = 0;
+
+    // 유튜브 API 스크립트 로딩 자체가 실패하면(네트워크 차단 등) 제목 자리에
+    // 에러를 표시합니다.
+    function showApiError() {
+      if (titleEl) titleEl.textContent = '유튜브 API 오류';
+      if (artistEl) artistEl.textContent = '';
+    }
+
     loadYouTubeAPI(() => {
       player = new YT.Player('bgmPlayer', {
         width: '2',
@@ -136,6 +158,7 @@
           },
           onStateChange: (event) => {
             if (event.data === YT.PlayerState.PLAYING) {
+              consecutiveErrors = 0;
               setPlayingUI(true);
             } else if (event.data === YT.PlayerState.PAUSED) {
               setPlayingUI(false);
@@ -144,9 +167,20 @@
               playTrack(trackIndex + 1);
             }
           },
+          onError: (event) => {
+            console.warn(`[BGM] "${TRACKS[trackIndex].title}" 재생 실패(에러 코드 ${event.data}). 다음 곡으로 넘어갑니다.`);
+            consecutiveErrors += 1;
+            if (consecutiveErrors >= TRACKS.length) {
+              setPlayingUI(false);
+              if (titleEl) titleEl.textContent = '유튜브 오류';
+              if (artistEl) artistEl.textContent = '';
+              return;
+            }
+            playTrack(trackIndex + 1);
+          },
         },
       });
-    });
+    }, showApiError);
 
     armAutoplayFallback();
 
